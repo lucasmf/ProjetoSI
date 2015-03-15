@@ -53,5 +53,11 @@ public class Login extends Controller {
 		}
 		return false;
 	}
+	
+	@Transactional
+	 public static Result logout() {
+	       session().clear();
+	       return redirect(routes.Application.index());
+	    }
 
 }
