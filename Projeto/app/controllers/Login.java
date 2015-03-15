@@ -42,8 +42,9 @@ public class Login extends Controller {
 			return redirect(routes.Application.index());
 		}
 	}
-
-	private static boolean validate(String email, String senha) {
+	
+	@Transactional
+	public static boolean validate(String email, String senha) {
 		List<Usuario> usuarios = dao.findAllByClassName("Usuario");
 		for (Usuario usuario : usuarios) {
 			if (usuario.getEmail().equals(email)
