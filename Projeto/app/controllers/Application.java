@@ -14,5 +14,10 @@ public class Application extends Controller {
        return ok(index.render("Your new application is ready."));
        // return redirect(routes.Login.show());
     }
+    
+    public static Result logout() {
+       session().clear();
+       return redirect(routes.Application.index());
+    }
 
 }
