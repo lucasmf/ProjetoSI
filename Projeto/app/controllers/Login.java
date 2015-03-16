@@ -14,8 +14,8 @@ import views.html.login;
 public class Login extends Controller {
 
 	private static GenericDAO dao = new GenericDAOImpl();
-	static Form<Usuario> loginForm = Form.form(Usuario.class).bindFromRequest();
-
+	private static Form<Usuario> loginForm = Form.form(Usuario.class).bindFromRequest();
+	
 	@Transactional
 	public static Result show() {
 		if (session().get("email") != null) {
@@ -43,6 +43,32 @@ public class Login extends Controller {
 		}
 	}
 	
+	public static Result signUp() {
+		Form<Usuario> signUpForm = Form.form(Usuario.class).bindFromRequest();
+		Usuario u = signUpForm.get();
+		String email = u.getEmail();
+		if (signUpForm.hasErrors()) {
+			flash("fail", "Nome, email ou Senha Inválidos");
+			return badRequest(login.render(signUpForm));
+		} else if(validate(email)){
+			flash("fail", "Email já existente");
+			return badRequest(login.render(signUpForm));
+		} else {
+			dao.persist(u);
+			dao.flush();
+			return redirect(routes.Login.show());
+		}
+	}
+	
+	@Transactional
+	private static boolean validate(String email) {
+		List<Usuario> usuarios = dao.findByAttributeName("Usuario", "email", email);
+		if(usuarios.size() == 0) {
+			return false;
+		}
+		return true;
+	}
+
 	@Transactional
 	public static boolean validate(String email, String senha) {
 		List<Usuario> usuarios = dao.findAllByClassName("Usuario");

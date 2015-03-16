@@ -1,4 +1,6 @@
 package tests;
+import java.util.List;
+
 import models.Usuario;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
@@ -31,8 +33,10 @@ public class LoginTest extends AbstractTest {
 		callAction(controllers.routes.ref.Login.logout(),
 				fakeRequest());
 		Usuario usuario = new Usuario("casal20", "casal20@gmail.com", "casal20");
-		if (dao.findByAttributeName("Usuario", "email", "casal20@gmail.com") != null) {
+		List<Usuario> usuarios = dao.findByAttributeName("Usuario", "email", "casal20@gmail.com");
+		if (usuarios.size() == 0) {
 			dao.persist(usuario);
+			//dao.flush();
 		}
 
 	}
@@ -45,7 +49,7 @@ public class LoginTest extends AbstractTest {
 		assertThat(status(result)).isEqualTo(Http.Status.OK);		
 	} 
 	
-	/*@Test
+/*	@Test
 	@Transactional
 	public void testAuthenticateSuccess() {
 	    Result result = callAction(
@@ -54,14 +58,13 @@ public class LoginTest extends AbstractTest {
 	            "email", "casal20@gmail.com",
 	            "password", "casal20"))
 	    );
-	    assertEquals(302, status(result));
+	    assertEquals(200, status(result));
 	    assertEquals("casal20@gmail.com", session(result).get("email"));
-	}*/
-	
+	}
+	*/
 	@Test
 	@Transactional
 	public void testAuthenticateFailure() {
-		//System.out.println(dao.findAllByClassName("Usuario").size());
 	    Result result = callAction(
 	        controllers.routes.ref.Login.authenticate(),
 	        fakeRequest().withFormUrlEncodedBody(ImmutableMap.of(
