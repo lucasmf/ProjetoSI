@@ -1,3 +1,4 @@
+import models.Disciplina;
 import models.Usuario;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
@@ -21,6 +22,11 @@ public class Global extends GlobalSettings {
 				if (dao.findByAttributeName("Usuario", "email", "casal20") != null) {
 					dao.persist(usuario);
 				}
+				
+				/*Disciplina disciplina = new Disciplina("SI1");
+				if (dao.findByAttributeName("Disciplina", "nome", "SI1") != null) {
+					dao.persist(disciplina);
+				}*/
 				dao.flush();				
 			}
 		});
