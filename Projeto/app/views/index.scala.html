@@ -5,7 +5,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>Bootstrap 3 Control Panel</title>
+		<title>Portal do Leite</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
@@ -18,7 +18,7 @@
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="icon-toggle"></span>
       </button>
-      <a class="navbar-brand" href="#">Control Panel</a>
+      <a class="navbar-brand" href="#">Portal do Leite</a>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -28,13 +28,7 @@
             <i class="glyphicon glyphicon-user"></i> Admin <span class="caret"></span></a>
           <ul id="g-account-menu" class="dropdown-menu" role="menu">
             <li><a href="#">My Profile</a></li>
-        	<li>
-        		<form action="@routes.Login.logout()" method="post">
-        			<input type="submit" value="Logout">
-        		</form>
-        	</li>
-            
-           
+            <li><a href="/logout">logout</a></li>
           </ul>
         </li>
       </ul>
