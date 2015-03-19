@@ -30,7 +30,6 @@ public class Application extends Controller {
 		}
         Usuario usuario = (Usuario) dao.findByAttributeName("Usuario",
 				"email", session().get("email")).get(0);
-        //TODO consertar isso
         
         List<Disciplina> disciplina = dao.findByAttributeName("Disciplina", "nome","SI1");
         return ok(index.render(usuario, disciplina.get(0)));
