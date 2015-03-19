@@ -1,15 +1,15 @@
 package models;
 
-import java.util.*;
-
-import models.Usuario;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import scala.collection.mutable.HashSet;
+import javax.persistence.OneToMany;
 
 @Entity(name="Tema")
 public class Tema {
@@ -21,6 +21,9 @@ public class Tema {
 	private String nome;
 	private HashMap<Long, Integer> votos;
 	private HashMap<Integer, Integer> quantidadeVotos;
+	
+	@OneToMany
+	private List<DicaSimples> dicas = new LinkedList<DicaSimples>();
 	//private String glyphicon;
 	
 	@ManyToOne
@@ -36,8 +39,16 @@ public class Tema {
 		votos = new HashMap<Long, Integer>();
 		quantidadeVotos = new HashMap<Integer, Integer>();
 		this.nome = nome;
+		quantidadeVotos.put(0, 0);
+		quantidadeVotos.put(1, 0);
+		quantidadeVotos.put(2, 0);
+		quantidadeVotos.put(-1, 0);
+		quantidadeVotos.put(-2, 0);
 	}
 	
+	public void addDica(DicaSimples dica) {
+		dicas.add(dica);
+	}
 	
 	public void votar(Usuario usuario, int v) {
 		Integer votoATrocar = votos.get(usuario.getId());
@@ -113,6 +124,18 @@ public class Tema {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+
+
+	public List<DicaSimples> getDicas() {
+		return dicas;
+	}
+
+
+
+	public void setDicas(List<DicaSimples> dicas) {
+		this.dicas = dicas;
 	}
 	
 /*	public String getGlyphicon() {

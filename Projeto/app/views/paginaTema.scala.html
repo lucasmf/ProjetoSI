@@ -59,7 +59,7 @@
     <div class="col-sm-9">
       	
       <!-- column 2 -->	
-       <h3><i class="glyphicon glyphicon-dashboard"></i> Dashboard</h3>  
+       <h3><i class="glyphicon glyphicon-dashboard"></i> Dicas </h3>  
             
        <hr>
       
@@ -69,6 +69,14 @@
 			  <div class="well">Inbox Messages <span class="badge pull-right">3</span></div>
               
               <hr>
+              
+             @for(dica <- tema.getDicas()) {
+             	<div class="panel panel-default">
+                  <div class="panel-heading"><h4>Dica #</h4></div>
+                  <div class="panel-body"> @dica.toString()
+                  </div><!--/panel-body-->
+               </div><!--/panel-->     
+             }
               
               <div class="panel panel-default">
                   <div class="panel-heading"><h4>Processing Status</h4></div>

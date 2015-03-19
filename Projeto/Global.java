@@ -1,3 +1,6 @@
+import models.Dica;
+import models.DicaMaterial;
+import models.DicaSimples;
 import models.Disciplina;
 import models.Tema;
 import models.Usuario;
@@ -15,6 +18,9 @@ public class Global extends GlobalSettings {
 	public void addTemaGlobal(Disciplina disciplina, String nome) {
 		if (dao.findByAttributeName("Tema", "nome", nome) != null) {
 			Tema tema = new Tema(nome);
+			DicaSimples dica = new DicaMaterial("dica");
+			dao.persist(dica);
+			tema.addDica(dica);
 			dao.persist(tema);
 			disciplina.addTema(tema);
 		}

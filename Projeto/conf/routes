@@ -6,7 +6,7 @@
 GET     /                           controllers.Application.index()
 
 # Tema Page
-GET		/:id/tema					controllers.Application.getPaginaTema(id : Long)
+GET		/tema/:id					controllers.Application.getPaginaTema(id : Long)
 
 # Login
 GET     /login                      controllers.Login.show()
