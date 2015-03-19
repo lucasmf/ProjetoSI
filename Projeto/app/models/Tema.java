@@ -48,26 +48,31 @@ public class Tema {
 		quantidadeVotos.put(v, quantidadeVotos.get(v)+1);
 	}
 	
-	public Integer getMediana() {
+	public Double getMediana() {
 		List<Integer> list = new ArrayList<Integer>();
 		for(Integer i = -2; i<=2; i++) {
 			for(Integer j = 0; j<quantidadeVotos.get(i); j++) {
 				list.add(i);
 			}
 		}
-		if(list.size()%2 == 0) {
-			return (list.get(list.size()/2) + list.get((list.size()/2)+1))/2;
-		}
-		return list.get(list.size()/2);
+		
+		if(list.size() == 0) return 0.0;
+		
+		double ret;
+		if(list.size()%2 == 0) 
+			ret = ((double)list.get(list.size()/2).intValue() + (double)list.get((list.size()/2)+1).intValue())/2.0;	
+		else ret = (double)list.get(list.size()/2).intValue();
+		return ret;
 	}
 	
-	public Integer getMedia() {
-		Integer ret = 0;
+	public Double getMedia() {
+		double ret = 0;
 		Integer total = 0;
 		for(Integer i = -2; i<=2; i++) {
-			ret += quantidadeVotos.get(i)*i;
+			ret += quantidadeVotos.get(i).intValue()*(double)i;
 			total += quantidadeVotos.get(i);
 		}
+		if(total == 0) return 0.0;
 		return ret/total;
 	}
 	

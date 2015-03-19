@@ -36,5 +36,22 @@ public class Application extends Controller {
         // return redirect(routes.Login.show());
     }
     
-    
+	@Transactional
+    public static Result getPaginaTema(Long id) {
+		
+		if (session().get("email") == null) {
+        	return redirect(routes.Login.show());
+        }
+		if(dao.findByAttributeName("Usuario",
+				"email", session().get("email")).size() == 0) {
+					session().clear();
+					return redirect(routes.Login.show());
+		}
+        Usuario usuario = (Usuario) dao.findByAttributeName("Usuario",
+				"email", session().get("email")).get(0);
+		
+		Tema tema = (Tema)dao.findByEntityId(Tema.class, id);
+		if(tema == null) return badRequest();
+		return ok(paginaTema.render(usuario, tema));
+	}
 }
