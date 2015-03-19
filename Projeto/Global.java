@@ -1,4 +1,5 @@
 import models.Disciplina;
+import models.Tema;
 import models.Usuario;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
@@ -11,6 +12,14 @@ import play.db.jpa.JPA;
 public class Global extends GlobalSettings {
 	private static GenericDAO dao = new GenericDAOImpl();
 
+	public void addTemaGlobal(Disciplina disciplina, String nome) {
+		if (dao.findByAttributeName("Tema", "nome", nome) != null) {
+			Tema tema = new Tema(nome);
+			dao.persist(tema);
+			disciplina.addTema(tema);
+		}
+	}
+	
 	@Override
 	public void onStart(Application app) {
 		Logger.info("Aplicação inicializada...");
@@ -23,10 +32,24 @@ public class Global extends GlobalSettings {
 					dao.persist(usuario);
 				}
 				
-				/*Disciplina disciplina = new Disciplina("SI1");
+				Disciplina disciplina = new Disciplina("SI1");
+				
+				addTemaGlobal(disciplina, "Análise x Design");
+				addTemaGlobal(disciplina, "OO");
+				addTemaGlobal(disciplina, "GRASP");
+				addTemaGlobal(disciplina, "GoF");
+				addTemaGlobal(disciplina, "Arquitetura");
+				addTemaGlobal(disciplina, "Play");
+				addTemaGlobal(disciplina, "JS");
+				addTemaGlobal(disciplina, "HTML+CSS+Bootstrap");
+				addTemaGlobal(disciplina, "Heroku");
+				addTemaGlobal(disciplina, "Labs");
+				addTemaGlobal(disciplina, "Minitestes");
+				addTemaGlobal(disciplina, "Projeto");
+				
 				if (dao.findByAttributeName("Disciplina", "nome", "SI1") != null) {
 					dao.persist(disciplina);
-				}*/
+				}
 				dao.flush();				
 			}
 		});

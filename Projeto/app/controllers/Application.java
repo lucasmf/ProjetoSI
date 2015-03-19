@@ -1,6 +1,8 @@
 package controllers;
 
 import java.util.*;
+
+import models.Disciplina;
 import models.Usuario;
 import models.Tema;
 import models.dao.GenericDAO;
@@ -28,8 +30,10 @@ public class Application extends Controller {
 		}
         Usuario usuario = (Usuario) dao.findByAttributeName("Usuario",
 				"email", session().get("email")).get(0);
-        List<Tema> temas = dao.findAllByClassName("Tema");
-        return ok(index.render(usuario, temas));
+        //TODO consertar isso
+        
+        List<Disciplina> disciplina = dao.findByAttributeName("Disciplina", "nome","SI1");
+        return ok(index.render(usuario, disciplina.get(0)));
         // return redirect(routes.Login.show());
     }
     

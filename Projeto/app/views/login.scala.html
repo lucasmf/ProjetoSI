@@ -62,8 +62,11 @@
 		        <h4 class="modal-title" id="myModalLabel">Cadastre-se</h4>
 		      </div>
 		      @helper.form(routes.Login.signUp) {
-				   <h1 class="text-center">Cadastrar</h1>
-				   <br>
+				 <br>
+			       <p>
+				       <input type="nome" name="nome" placeholder="Nome" value='@form("nome").value'
+			                  class="form-control">
+			       </p>
 			       <p>
 				       <input type="email" name="email" placeholder="Email" value='@form("email").value'
 			                  class="form-control">
@@ -74,6 +77,7 @@
 			       <div align="center">
 				       <button class="btn btn-primary" type="submit">Cadastrar</button>
 			       </div>
+			       <br>
 				}
 	
 		    </div>

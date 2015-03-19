@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -18,10 +19,10 @@ public class Disciplina {
 	private String nome;
 	//private String sigla; ??
 	@OneToMany
-	private List<Tema> temas;
+	private List<Tema> temas = new ArrayList<Tema>();
 	
 	@OneToMany
-	private List<Metadica> metadicas;
+	private List<Metadica> metadicas = new ArrayList<Metadica>();
 	
 	
 	public Disciplina() {

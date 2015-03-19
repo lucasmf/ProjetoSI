@@ -1,11 +1,11 @@
-@(usuario : Usuario, temas : List[Tema])
+@(usuario : Usuario, disciplina : Disciplina)
 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>Portal do Leite - Olá @usuario.getEmail</title>
+		<title>Portal do Leite - Olá @usuario.getNome</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
@@ -25,9 +25,8 @@
         
         <li class="dropdown">
           <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-            <i class="glyphicon glyphicon-user"></i> Admin <span class="caret"></span></a>
+            <i class="glyphicon glyphicon-user"></i> @usuario.getNome <span class="caret"></span></a>
           <ul id="g-account-menu" class="dropdown-menu" role="menu">
-            <li><a href="#">My Profile</a></li>
             <li><a href="/logout">logout</a></li>
           </ul>
         </li>
@@ -48,7 +47,7 @@
       <hr>
       
       <ul class="nav nav-stacked">
-      	@for(tema <- temas) {
+      	@for(tema <- disciplina.getTemas) {
       		<li><a href="javascript:;"><i class="glyphicon glyphicon-link"></i> @tema.getNome</a></li>
       	}
         <!-- <li><a href="javascript:;"><i class="glyphicon glyphicon-flash"></i> Alerts</a></li>
@@ -119,10 +118,10 @@
                 <hr>
               
 				<p>
-                  This is a responsive dashboard-style layout that uses <a href="http://www.getbootstrap.com">Bootstrap 3</a>. You can use this template as a starting point to create something more unique.
+                 Esse é o Portal do Leite da disciplina de Sistemas de Informação 1. Aqui você pode acompanhar dicas sobre a disciplina, avaliar as dicas e contribuir com seus próprios comentários de conselhos!
                 </p>
                 <p>
-                  Visit the Bootstrap Playground at <a href="http://www.bootply.com">Bootply</a> to tweak this layout, or discover 1000's of Bootstrap code examples and snippets.
+                  Esta ferramenta foi feita pelos desenvolvedores Lucas de Matos e Letícia Maia, com o objetivo de ajudar alunoas na disciplina, através do compartilhamento de ideias.
                 </p>
               
                 <hr>
