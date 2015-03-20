@@ -55,4 +55,25 @@ public class Application extends Controller {
 		if(tema == null) return badRequest();
 		return ok(paginaTema.render(usuario, tema));
 	}
+	
+	@Transactional
+	public static Result votar(Long id, Integer v) {
+		if(v > 2 || v < -2) return badRequest();
+		if (session().get("email") == null) {
+        	return redirect(routes.Login.show());
+        }
+		if(dao.findByAttributeName("Usuario",
+				"email", session().get("email")).size() == 0) {
+					session().clear();
+					return redirect(routes.Login.show());
+		}
+        Usuario usuario = (Usuario) dao.findByAttributeName("Usuario",
+				"email", session().get("email")).get(0);
+        
+        Tema tema = (Tema)dao.findByEntityId(Tema.class, id);
+		if(tema == null) return badRequest();
+		tema.votar(usuario, v);
+		return ok(paginaTema.render(usuario, tema));
+	
+	}
 }
