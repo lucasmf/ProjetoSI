@@ -28,6 +28,7 @@ public abstract class Dica {
 	}
 	
 	public double getAprovacao(){
+		if(votos[0]+votos[1] == 0) return 0.0;
 		return (double)votos[1]/(votos[0]+votos[1]);
 	}
 	
