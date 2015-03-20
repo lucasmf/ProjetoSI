@@ -21,4 +21,9 @@ public class DicaMaterial extends DicaSimples {
 	public void setLinkMaterial(String linkMaterial) {
 		this.linkMaterial = linkMaterial;
 	}
+
+	@Override
+	public String toString() {
+		return "Link para Material: " + linkMaterial;
+	}
 }

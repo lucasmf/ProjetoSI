@@ -53,6 +53,7 @@ public class Tema {
 	public void votar(Usuario usuario, int v) {
 		Integer votoATrocar = votos.get(usuario.getId());
 		votos.put(usuario.getId(), v);
+		System.out.println(id);
 		if(votoATrocar != null) {
 			quantidadeVotos.put(votoATrocar, quantidadeVotos.get(votoATrocar)-1);
 		}
@@ -80,10 +81,11 @@ public class Tema {
 		double ret = 0;
 		Integer total = 0;
 		for(Integer i = -2; i<=2; i++) {
+			if(quantidadeVotos.get(i) == null) System.out.println("aaa");
 			ret += quantidadeVotos.get(i).intValue()*(double)i;
 			total += quantidadeVotos.get(i);
 		}
-		if(total == 0) return 0.0;
+		if(total.equals(0)) return 0.0;
 		return ret/total;
 	}
 	

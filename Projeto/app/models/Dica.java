@@ -1,11 +1,14 @@
 package models;
 
+import java.util.HashMap;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 @Entity(name="Dica")
@@ -16,7 +19,10 @@ public abstract class Dica {
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade= CascadeType.ALL)
 	private Disciplina disciplina;
-		
+	
+	@OneToMany
+	private HashMap<Long, Avaliacao> avaliacoes;
+	
 	public Dica() {
 		
 	}
@@ -27,5 +33,17 @@ public abstract class Dica {
 
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
+	}
+	
+	public void addAvaliacao(Usuario usuario, Avaliacao avaliacao) {
+		
+	}
+
+	public HashMap<Long, Avaliacao> getAvaliacoes() {
+		return avaliacoes;
+	}
+
+	public void setAvaliacoes(HashMap<Long, Avaliacao> avaliacoes) {
+		this.avaliacoes = avaliacoes;
 	}
 }
