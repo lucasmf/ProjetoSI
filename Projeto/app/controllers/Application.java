@@ -3,6 +3,7 @@ package controllers;
 import java.util.LinkedList;
 import java.util.List;
 
+import models.Dica;
 import models.DicaMaterial;
 import models.DicaSimples;
 import models.Disciplina;
@@ -78,6 +79,13 @@ public class Application extends Controller {
 	
 	@Transactional
 	public static Result adicionarDica(Long id) {
+		if (session().get("email") == null) {
+        	return redirect(routes.Login.show());
+        }
+		if(naoExisteUsuarioLogado()) {
+					session().clear();
+					return redirect(routes.Login.show());
+		}
 		addDicaForm = Form.form(DicaMaterial.class).bindFromRequest();
 		Tema tema = (Tema)dao.findByEntityId(Tema.class, id);
 		DicaSimples dica = addDicaForm.get();
@@ -87,6 +95,25 @@ public class Application extends Controller {
 		dao.flush();
 		return ok(paginaTema.render(getUsuarioLogado(), tema, addDicaForm));
 	}
+	
+	@Transactional
+	public static Result votarDica(Long idDica, Long idTema, int v) {
+		if (session().get("email") == null) {
+        	return redirect(routes.Login.show());
+        }
+		if(naoExisteUsuarioLogado()) {
+					session().clear();
+					return redirect(routes.Login.show());
+		}
+		Dica dica = (Dica)dao.findByEntityId(Dica.class, id);
+		dica.votar(v);
+		return ok(paginaTema.render(getUsuarioLogado(), tema, addDicaForm));
+		
+	}
+	
+	
+	
+	
 	
 	private static Usuario getUsuarioLogado() {
 		return (Usuario) dao.findByAttributeName("Usuario",
