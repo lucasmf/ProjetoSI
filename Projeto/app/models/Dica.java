@@ -13,14 +13,13 @@ import javax.persistence.OneToMany;
 
 @Entity(name="Dica")
 public abstract class Dica {
-	 @Id
-	 @GeneratedValue
-	 private Long id;
-	
+	@Id
+	@GeneratedValue
+	private Long id;
+
 	@ManyToOne(fetch=FetchType.LAZY, cascade= CascadeType.ALL)
 	private Disciplina disciplina;
 	
-	@OneToMany
 	private HashMap<Long, Avaliacao> avaliacoes;
 	
 	public Dica() {

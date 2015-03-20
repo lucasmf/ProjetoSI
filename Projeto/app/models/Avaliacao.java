@@ -1,8 +1,11 @@
 package models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity(name="Avaliacao")
 public class Avaliacao {
@@ -14,13 +17,17 @@ public class Avaliacao {
 	private String comentario;
 	private boolean like;
 	
+	@ManyToOne(fetch=FetchType.LAZY, cascade= CascadeType.ALL)
+	private Dica dica;
+	
 	public Avaliacao() {
 		
 	}
 	
-	public Avaliacao(boolean like, String comentario) {
+	public Avaliacao(boolean like, String comentario, Dica dica) {
 		this.setLike(like);
 		this.setComentario(comentario);
+		this.setDica(dica);
 		
 	}
 	
@@ -42,5 +49,13 @@ public class Avaliacao {
 
 	public void setLike(boolean like) {
 		this.like = like;
+	}
+
+	public Dica getDica() {
+		return dica;
+	}
+
+	public void setDica(Dica dica) {
+		this.dica = dica;
 	}
 }
