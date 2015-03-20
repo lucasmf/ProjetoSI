@@ -91,8 +91,18 @@
               
              @for(dica <- tema.getDicas()) {
              	<div class="panel panel-default">
-                  <div class="panel-heading"><h4>Dica # @tema.getDicas().indexOf(dica)</h4></div>
-                  <div class="panel-body"> @dica.toString()
+                  <div class="panel-heading">
+                  	<h4>Dica # @tema.getDicas().indexOf(dica)
+		                <div class="pull-right">
+					      	<a href="/tema/@tema.getId()/@dica.getId()/1"><span style="color:green" class="glyphicon glyphicon-success glyphicon-chevron-up"></span></a>
+		                    @dica.getAprovacao%  
+		                  	<a href="/tema/@tema.getId()/@dica.getId()/0"><span style="color:red" class="glyphicon glyphicon-danger glyphicon-chevron-down"></span></a>                  
+	                  	</div>
+	                  </h4>
+                  </div>
+                  <div class="panel-body">
+                   @dica.toString()
+                  <br>
                   </div><!--/panel-body-->
                </div><!--/panel-->     
              }
@@ -107,14 +117,7 @@
        			</ul>  
               
                 <hr>
-              
-				<p>
-                 Esse é o Portal do Leite da disciplina de Sistemas de Informação 1. Aqui você pode acompanhar dicas sobre a disciplina, avaliar as dicas e contribuir com seus próprios comentários de conselhos!
-                </p>
-                <p>
-                  Esta ferramenta foi feita pelos desenvolvedores Lucas de Matos e Letícia Maia, com o objetivo de ajudar alunoas na disciplina, através do compartilhamento de ideias.
-                </p>
-              
+        		
                 <hr>
 			</div><!--/col-span-6-->
      
