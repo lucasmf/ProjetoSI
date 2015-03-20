@@ -9,7 +9,8 @@ import javax.persistence.ManyToOne;
 
 
 @Entity(name="Dica")
-public abstract class Dica {
+public abstract class Dica implements Comparable{
+
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -66,6 +67,13 @@ public abstract class Dica {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	@Override
+	public int compareTo(Object o) {
+		if(o.getClass() != Dica.class) return -1;
+		Dica other = (Dica)o;
+		return (this.getAprovacao() - other.getAprovacao() > 0)?1:-1;
 	}
 	
 /*	public void addAvaliacao(Usuario usuario, Avaliacao avaliacao) {
