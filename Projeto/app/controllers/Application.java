@@ -97,7 +97,7 @@ public class Application extends Controller {
 	}
 	
 	@Transactional
-	public static Result votarDica(Long idDica, Long idTema, int v) {
+	public static Result votarDica(Long idTema, Long idDica, Integer v) {
 		if (session().get("email") == null) {
         	return redirect(routes.Login.show());
         }
@@ -105,7 +105,8 @@ public class Application extends Controller {
 					session().clear();
 					return redirect(routes.Login.show());
 		}
-		Dica dica = (Dica)dao.findByEntityId(Dica.class, id);
+		Dica dica = (Dica)dao.findByEntityId(Dica.class, idDica);
+		Tema tema = (Tema)dao.findByEntityId(Tema.class, idDica);
 		dica.votar(v);
 		return ok(paginaTema.render(getUsuarioLogado(), tema, addDicaForm));
 		
