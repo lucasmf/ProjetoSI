@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import models.DicaMaterial;
@@ -20,6 +21,7 @@ public class Application extends Controller {
 
 	private static GenericDAO dao = new GenericDAOImpl();
 	private static Form<DicaMaterial> addDicaForm = Form.form(DicaMaterial.class).bindFromRequest();
+	
 	@Transactional
     public static Result index() {
 		//session().clear();
@@ -51,7 +53,7 @@ public class Application extends Controller {
 		
 		Tema tema = (Tema)dao.findByEntityId(Tema.class, id);
 		if(tema == null) return badRequest();
-		return ok(paginaTema.render(usuario, tema));
+		return ok(paginaTema.render(usuario, tema, addDicaForm));
 	}
 	
 	@Transactional
@@ -65,13 +67,12 @@ public class Application extends Controller {
 					return redirect(routes.Login.show());
 		}
         Usuario usuario = getUsuarioLogado();
-        
         Tema tema = (Tema)dao.findByEntityId(Tema.class, id);
 		if(tema == null) return badRequest();
 		tema.votar(usuario, v);
 		//dao.merge(tema);
 		//dao.flush();
-		return ok(paginaTema.render(usuario, tema));
+		return ok(paginaTema.render(usuario, tema, addDicaForm));
 	
 	}
 	
@@ -84,7 +85,7 @@ public class Application extends Controller {
 		tema.addDica(dica);
 		dao.merge(tema);
 		dao.flush();
-		return ok(paginaTema.render(getUsuarioLogado(), tema));
+		return ok(paginaTema.render(getUsuarioLogado(), tema, addDicaForm));
 	}
 	
 	private static Usuario getUsuarioLogado() {

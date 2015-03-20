@@ -1,4 +1,4 @@
-@(usuario : Usuario, tema : Tema)
+@(usuario : Usuario, tema : Tema, form : Form[DicaMaterial])
 
 <!DOCTYPE html>
 <html lang="en">
@@ -94,7 +94,7 @@
               
              @for(dica <- tema.getDicas()) {
              	<div class="panel panel-default">
-                  <div class="panel-heading"><h4>Dica #</h4></div>
+                  <div class="panel-heading"><h4>Dica # @tema.getDicas().indexOf(dica)</h4></div>
                   <div class="panel-body"> @dica.toString()
                   </div><!--/panel-body-->
                </div><!--/panel-->     
@@ -184,7 +184,7 @@
          @helper.form(routes.Application.adicionarDica(tema.getId())) {
 				 <br>
 			       <p>
-				       <input type="url" name="linkMaterial" placeholder="Link do Material" value='@form("linkMaterial").value'
+				      <input type="url" name="linkMaterial" placeholder="Link do Material" value='@form("linkMaterial").value'
 			                  class="form-control">
 			       </p>
 			   	<div align="center">
