@@ -1,10 +1,12 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,8 +21,12 @@ public class Tema {
 	private Long id;
 
 	private String nome;
-	private HashMap<Long, Integer> votos;
-	private HashMap<Integer, Integer> quantidadeVotos;
+	
+	 @ElementCollection
+	private Map <Long, Integer> votos;
+	
+	 @ElementCollection
+	private Map <Integer, Integer> quantidadeVotos;
 
 	@OneToMany
 	private List<DicaSimples> dicas = new LinkedList<DicaSimples>();
@@ -34,8 +40,8 @@ public class Tema {
 	}
 
 	public Tema(String nome) {
-		votos = new HashMap<Long, Integer>();
-		quantidadeVotos = new HashMap<Integer, Integer>();
+		votos = new TreeMap<Long, Integer>();
+		quantidadeVotos = new TreeMap<Integer, Integer>();
 		this.nome = nome;
 		quantidadeVotos.put(0, 0);
 		quantidadeVotos.put(1, 0);
@@ -82,6 +88,7 @@ public class Tema {
 		double ret = 0;
 		Integer total = 0;
 		for (Integer i = -2; i <= 2; i++) {
+			System.out.println( quantidadeVotos.get(i));
 			ret += quantidadeVotos.get(i).intValue() * (double) i;
 			total += quantidadeVotos.get(i);
 		}
@@ -90,19 +97,19 @@ public class Tema {
 		return ret / total;
 	}
 
-	public HashMap<Integer, Integer> getQuantidadeVotos() {
+	public Map<Integer, Integer> getQuantidadeVotos() {
 		return quantidadeVotos;
 	}
 
-	public void setQuantidadeVotos(HashMap<Integer, Integer> quantidadeVotos) {
+	public void setQuantidadeVotos(Map<Integer, Integer> quantidadeVotos) {
 		this.quantidadeVotos = quantidadeVotos;
 	}
 
-	public HashMap<Long, Integer> getVotos() {
+	public Map<Long, Integer> getVotos() {
 		return votos;
 	}
 
-	public void setVotos(HashMap<Long, Integer> votos) {
+	public void setVotos(Map<Long, Integer> votos) {
 		this.votos = votos;
 	}
 

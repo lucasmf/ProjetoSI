@@ -28,6 +28,7 @@
             <i class="glyphicon glyphicon-user"></i> @usuario.getNome <span class="caret"></span></a>
           <ul id="g-account-menu" class="dropdown-menu" role="menu">
             <li><a href="/logout">logout</a></li>
+            <li><a href="#">Página Principal</a></li>
           </ul>
         </li>
       </ul>
@@ -49,7 +50,7 @@
       <ul class="nav nav-stacked">
       	@for(tema <- disciplina.getTemas) {
       		<li><a href='@routes.Application.getPaginaTema(tema.getId)'><i class="glyphicon glyphicon-link"></i> @tema.getNome</a></li>
-      	}
+      	}		
       </ul>
       
       <hr>
@@ -101,22 +102,10 @@
         	<div class="col-md-5">
               
                 <ul class="nav nav-justified">
-         			<li><a href="#"><i class="glyphicon glyphicon-cog"></i></a></li>
-                    <li><a href="#"><i class="glyphicon glyphicon-heart"></i></a></li>
-         			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-comment"></i><span class="count">3</span></a><ul class="dropdown-menu" role="menu"><li><a href="#">1. Is there a way..</a></li><li><a href="#">2. Hello, admin. I would..</a></li><li><a href="#"><strong>All messages</strong></a></li></ul></li>
-         			<li><a href="#"><i class="glyphicon glyphicon-user"></i></a></li>
-         			<li><a title="Add Widget" data-toggle="modal" href="#addWidgetModal"><span class="glyphicon glyphicon-plus-sign"></span></a></li>
+         			<li><a title="Add Widget" data-toggle="modal" href="#addWidgetModal"><span class="glyphicon glyphicon-plus-sign"></span>Adiconar Dica</a></li>
        			</ul>  
               
                 <hr>
-              
-				<p>
-                 Esse é o Portal do Leite da disciplina de Sistemas de Informação 1. Aqui você pode acompanhar dicas sobre a disciplina, avaliar as dicas e contribuir com seus próprios comentários de conselhos!
-                </p>
-                <p>
-                  Esta ferramenta foi feita pelos desenvolvedores Lucas de Matos e Letícia Maia, com o objetivo de ajudar alunoas na disciplina, através do compartilhamento de ideias.
-                </p>
-              
                 <hr>
               
                 <div class="btn-group btn-group-justified">

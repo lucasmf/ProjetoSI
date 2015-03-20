@@ -8,6 +8,7 @@ GET     /                           controllers.Application.index()
 # Tema Page
 GET		/tema/:id					controllers.Application.getPaginaTema(id : Long)
 GET		/tema/:id/:v				controllers.Application.votar(id : Long, v : Integer)
+POST    /dica/:id                   controllers.Application.adicionarDica(id : Long)
 
 # Login
 GET     /login                      controllers.Login.show()
