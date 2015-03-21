@@ -106,16 +106,12 @@ public class Application extends Controller {
 					return redirect(routes.Login.show());
 		}
 		Dica dica = (Dica)dao.findByEntityId(Dica.class, idDica);
-		Tema tema = (Tema)dao.findByEntityId(Tema.class, idDica);
+		Tema tema = (Tema)dao.findByEntityId(Tema.class, idTema);
 		dica.votar(v);
 		return ok(paginaTema.render(getUsuarioLogado(), tema, addDicaForm));
 		
 	}
-	
-	
-	
-	
-	
+		
 	private static Usuario getUsuarioLogado() {
 		return (Usuario) dao.findByAttributeName("Usuario",
 				"email", session().get("email")).get(0);
