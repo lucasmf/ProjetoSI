@@ -108,9 +108,10 @@ public class Application extends Controller {
 		Dica dica = (Dica)dao.findByEntityId(Dica.class, idDica);
 		Tema tema = (Tema)dao.findByEntityId(Tema.class, idTema);
 		dica.votar(v);
+		dao.merge(dica);
+		tema = (Tema)dao.findByEntityId(Tema.class, idTema);
 		tema.sortDicas();
 		dao.merge(tema);
-		dao.merge(dica);
 		dao.flush();
 		return ok(paginaTema.render(getUsuarioLogado(), tema, addDicaForm));
 		
