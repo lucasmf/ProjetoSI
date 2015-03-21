@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -145,6 +146,10 @@ public class Tema {
 		this.dicas = dicas;
 	}
 
+	public void sortDicas() {
+		Collections.reverse(this.dicas);
+	}
+	
 	/*
 	 * public String getGlyphicon() { return glyphicon; } public void
 	 * setGlyphicon(String glyphicon) { this.glyphicon = glyphicon; }

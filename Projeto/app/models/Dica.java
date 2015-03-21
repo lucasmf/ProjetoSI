@@ -73,7 +73,7 @@ public abstract class Dica implements Comparable{
 	public int compareTo(Object o) {
 		if(o.getClass() != Dica.class) return -1;
 		Dica other = (Dica)o;
-		return (this.getAprovacao() - other.getAprovacao() > 0)?1:-1;
+		return Double.compare(this.getAprovacao(), other.getAprovacao());
 	}
 	
 /*	public void addAvaliacao(Usuario usuario, Avaliacao avaliacao) {

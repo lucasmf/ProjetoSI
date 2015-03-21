@@ -71,8 +71,8 @@ public class Application extends Controller {
         Tema tema = (Tema)dao.findByEntityId(Tema.class, id);
 		if(tema == null) return badRequest();
 		tema.votar(usuario, v);
-		//dao.merge(tema);
-		//dao.flush();
+		dao.merge(tema);
+		dao.flush();
 		return ok(paginaTema.render(usuario, tema, addDicaForm));
 	
 	}
@@ -108,6 +108,10 @@ public class Application extends Controller {
 		Dica dica = (Dica)dao.findByEntityId(Dica.class, idDica);
 		Tema tema = (Tema)dao.findByEntityId(Tema.class, idTema);
 		dica.votar(v);
+		tema.sortDicas();
+		dao.merge(tema);
+		dao.merge(dica);
+		dao.flush();
 		return ok(paginaTema.render(getUsuarioLogado(), tema, addDicaForm));
 		
 	}
