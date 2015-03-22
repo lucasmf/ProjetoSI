@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,8 +22,10 @@ public abstract class Dica implements Comparable{
 	
 	private int votos[];
 	
+	private Integer votosInapropriacao = 0;
+	
 	@ElementCollection
-	private Map <Long, Integer> votantes;
+	private Map <Long, Integer> votantes, votantesInapropriacao;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade= CascadeType.ALL)
 	private Disciplina disciplina;
@@ -52,6 +55,8 @@ public abstract class Dica implements Comparable{
 	public Dica() {
 		this.votos = new int[2];
 		this.votantes = new TreeMap<Long, Integer>();
+		this.votantesInapropriacao = new TreeMap<Long, Integer>();
+		this.votosInapropriacao = new Integer(0);
 		votos[0] = 0;
 		votos[1] = 0;
 	}
@@ -79,6 +84,15 @@ public abstract class Dica implements Comparable{
 	
 	public void votar(Long id, int v) {
 		
+		if(v == 2) {
+			if(votosInapropriacao == null) votosInapropriacao = new Integer(0);
+			if(votantesInapropriacao.get(id) == null) {
+				votosInapropriacao++;
+				votantesInapropriacao.put(id, 2);
+			}
+			return;
+		}
+	
 		
 		if(quantidadeDeVotos() >= 20) return;
 		
@@ -89,9 +103,6 @@ public abstract class Dica implements Comparable{
 		votos[v]++;
 	}
 
-	//public boolean isApropriada() {
-//		return votosInapropriacao < 3;
-	//}
 	
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
@@ -118,6 +129,27 @@ public abstract class Dica implements Comparable{
 		Dica other = (Dica)o;
 		return Integer.compare(other.getAprovacao(), this.getAprovacao());
 	}
+
+	public Integer getVotosInapropiacao() {
+		return votosInapropriacao;
+	}
+
+	public void setVotosInapropiacao(Integer votosInapropiacao) {
+		this.votosInapropriacao = votosInapropiacao;
+	}
+
+	public boolean isApropriada() {
+		if(votosInapropriacao == null) votosInapropriacao = new Integer(0);
+		return votosInapropriacao < 3;
+	}
+	
+//	public int getVotosInapropiacao() {
+//		return votosInapropiacao;
+//	}
+//
+//	public void setVotosInapropiacao(int votosInapropiacao) {
+//		this.votosInapropiacao = votosInapropiacao;
+//	}
 
 	
 	
