@@ -98,7 +98,7 @@ public class Application extends Controller {
 		tema.sortDicas();
 		dao.merge(tema);
 		dao.flush();
-		return returnPaginaTema(usuario, tema);
+		return redirect(routes.Application.getPaginaTema(id));
 
 	}
 
@@ -115,7 +115,7 @@ public class Application extends Controller {
 		Tema tema = (Tema) dao.findByEntityId(Tema.class, id);
 		DicaMaterial dica = (DicaMaterial) addDicaMaterialForm.get();
 		addDicaSimplesNoBD(tema, dica);
-		return returnPaginaTema(getUsuarioLogado(), tema);
+		return redirect(routes.Application.getPaginaTema(id));
 	}
 	
 
@@ -133,7 +133,7 @@ public class Application extends Controller {
 		Tema tema = (Tema) dao.findByEntityId(Tema.class, id);
 		DicaDisciplina dica = (DicaDisciplina) addDicaDisciplinaForm.get();
 		addDicaSimplesNoBD(tema, dica);
-		return returnPaginaTema(getUsuarioLogado(), tema);
+		return redirect(routes.Application.getPaginaTema(id));
 	}
 
 	
@@ -150,7 +150,7 @@ public class Application extends Controller {
 		Tema tema = (Tema) dao.findByEntityId(Tema.class, id);
 		DicaAssunto dica = (DicaAssunto) addDicaAssuntoForm.get();
 		addDicaSimplesNoBD(tema, dica);
-		return returnPaginaTema(getUsuarioLogado(), tema);
+		return redirect(routes.Application.getPaginaTema(id));
 	}
 
 	@Transactional
@@ -166,7 +166,7 @@ public class Application extends Controller {
 		Tema tema = (Tema) dao.findByEntityId(Tema.class, id);
 		DicaConselho dica = (DicaConselho) addDicaConselhoForm.get();
 		addDicaSimplesNoBD(tema, dica);
-		return returnPaginaTema(getUsuarioLogado(), tema);
+		return redirect(routes.Application.getPaginaTema(id));
 	}
 	
 	private static void addDicaSimplesNoBD(Tema tema, DicaSimples dica) {
@@ -195,7 +195,7 @@ public class Application extends Controller {
 		tema.sortDicas();
 		dao.merge(tema);
 		dao.flush();
-		return returnPaginaTema(usuario, tema);
+		return redirect(routes.Application.getPaginaTema(idTema));
 	}
 
 	@Transactional
@@ -218,8 +218,7 @@ public class Application extends Controller {
 		dao.merge(dica);
 		dao.merge(tema);
 		dao.flush();
-		return returnPaginaTema(usuario, tema);
-		
+		return redirect(routes.Application.getPaginaTema(idTema));
 	}
 	
 	private static Usuario getUsuarioLogado() {

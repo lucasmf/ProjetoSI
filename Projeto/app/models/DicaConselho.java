@@ -14,7 +14,7 @@ public class DicaConselho extends DicaSimples {
 	
 	public DicaConselho(String conselho) {
 		super();
-		this.conselho = conselho;
+		this.setConselho(conselho);
 	}
 	
 	public String getColor() {
@@ -27,7 +27,15 @@ public class DicaConselho extends DicaSimples {
 	
  	@Override
 	public String toString() {
-		return "Conselho: " + conselho;
+		return "Conselho: " + getConselho();
+	}
+
+	public String getConselho() {
+		return conselho;
+	}
+
+	public void setConselho(String conselho) {
+		this.conselho = conselho;
 	}
 
 }

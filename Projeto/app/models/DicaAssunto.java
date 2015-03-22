@@ -15,7 +15,7 @@ public class DicaAssunto extends DicaSimples {
 	
 	public DicaAssunto(String assunto) {
 		super();
-		this.assunto = assunto;
+		this.setAssunto(assunto);
 	}
 	
 	public String getColor() {
@@ -28,7 +28,15 @@ public class DicaAssunto extends DicaSimples {
 	
 	@Override
 	public String toString() {
-		return "Assunto que você precisa saber: " + assunto;
+		return "Assunto que você precisa saber: " + getAssunto();
+	}
+
+	public String getAssunto() {
+		return assunto;
+	}
+
+	public void setAssunto(String assunto) {
+		this.assunto = assunto;
 	}
 
 }

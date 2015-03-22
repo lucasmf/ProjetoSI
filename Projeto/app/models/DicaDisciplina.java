@@ -15,8 +15,8 @@ public class DicaDisciplina extends DicaSimples {
 	
 	public DicaDisciplina(String nomeDisciplina, String razao) {
 		super();
-		this.nomeDisciplina = nomeDisciplina;
-		this.razao = razao;
+		this.setNomeDisciplina(nomeDisciplina);
+		this.setRazao(razao);
 	}
 
 	public String getColor() {
@@ -29,8 +29,24 @@ public class DicaDisciplina extends DicaSimples {
 	
 	@Override
 	public String toString() {
-		return "Disciplina que vai te ajudar: " + nomeDisciplina +
-		". Razão :" + razao ;
+		return "Disciplina que vai te ajudar: " + getNomeDisciplina() +
+		". Razão :" + getRazao() ;
+	}
+
+	public String getNomeDisciplina() {
+		return nomeDisciplina;
+	}
+
+	public void setNomeDisciplina(String nomeDisciplina) {
+		this.nomeDisciplina = nomeDisciplina;
+	}
+
+	public String getRazao() {
+		return razao;
+	}
+
+	public void setRazao(String razao) {
+		this.razao = razao;
 	}
 
 }

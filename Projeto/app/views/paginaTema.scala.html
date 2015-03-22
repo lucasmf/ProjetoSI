@@ -49,22 +49,21 @@
       <h3>@tema.getNome()</h3>
       <hr>
       
+      <h4>Dificuldade:</h4>
       <ul class="nav nav-stacked">
-      	
       	<li>Média : @tema.getMedia</a></li>
       	<li>Mediana: @tema.getMediana</a></li>
-      	
       </ul>
       
       <hr>
-	  <a href="#"data-toggle="modal" data-target="#avaliarModal"><i class="glyphicon glyphicon-heart"></i> Avaliar</a>
+	  <a href="#"data-toggle="modal" data-target="#avaliarModal"><i class="glyphicon glyphicon-heart"></i> Avaliar Tema</a>
 	  <!-- Modal -->
 		<div class="modal fade" id="avaliarModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Avaliar Disciplina</h4>
+		        <h4 class="modal-title" id="myModalLabel">Avaliar Dificuldade do Tema</h4>
 		      </div>
 		      <br><br>
 		      <div align="center" btn-group" role="group">
@@ -110,7 +109,7 @@
 	                  </div><!--/panel-body-->
 	                  <div class="panel-footer">
 	                  	
-	                  	<a title="Escrever comentário" data-toggle="modal" href="#addComentarioModal@dica.getId">Comentar <i class="glyphicon glyphicon-pencil"></i></a>
+	                    <a title="Escrever comentário" data-toggle="modal" href="#addComentarioModal@dica.getId">Comentar <i class="glyphicon glyphicon-pencil"></i></a>
 	                  	<div class="modal" id="addComentarioModal@dica.getId">
 						  <div class="modal-dialog">
 						    <div class="modal-content">
@@ -122,20 +121,19 @@
 						        @if(dica.usuarioPodeComentar(usuario.getId)) {
 						       		<form action="@routes.Application.adicionarComentario(tema.getId, dica.getId)" method="POST">
 										<input type="text" name="comentario" placeholder="Comentário" value='@formComentario("comentario").value'
-			                  class="form-control">
+			                  				class="form-control">
 										<br>
-										<input type="submit" class="btn btn-primary" value="Comentar">
+										<div align="center"><input type="submit" class="btn btn-primary" value="Comentar"></div>
 									</form>
 								} else {
 									<div class="alert alert-warning" role="alert">Você precisa dar um voto negativo na dica para pode comentar.</div>
 								
 									<input type="text" name="comentarioDisabled" placeholder="Comentário" class="form-control" disabled>
-									<input type="submit" class="btn btn-primary" value="Comentar" disabled>
+									<br>
+									<div align="center"><input type="submit" class="btn btn-primary" value="Comentar" disabled></div>
 								}
 						      </div>
 						      <div class="modal-footer">
-						        <a href="#" class="btn">Close</a>
-						        <a href="#" class="btn btn-primary">Save changes</a>
 						      </div>
 						    </div><!-- /.modal-content -->
 						  </div><!-- /.modal-dalog -->
@@ -202,18 +200,22 @@
       </div>
       <div class="modal-body">
          <a title="Add Dica de Material" data-toggle="modal" href="#addDicaMaterialModal">
+         <span style="color:green" class="glyphicon glyphicon-plus-sign"></span>
          Adicionar Dica de Material útil
          </a>
          <hr>
          <a title="Add Dica de Disciplina" data-toggle="modal" href="#addDicaDisciplinaModal">
+         <span style="color:red" class="glyphicon glyphicon-plus-sign"></span>
          Adicionar Dica de Disciplinas 
          </a>
          <hr>
          <a title="Add Dica de Assunto" data-toggle="modal" href="#addDicaAssuntoModal">
+         <span style="color:orange" class="glyphicon glyphicon-plus-sign"></span>
          Adicionar Dica de Assunto 
          </a>
          <hr>
          <a title="Add Dica de Conseho" data-toggle="modal" href="#addDicaConselhoModal">
+          <span style="color:blue" class="glyphicon glyphicon-plus-sign"></span>
           Adicionar Dica de Conselho 
          </a>
          <hr>
