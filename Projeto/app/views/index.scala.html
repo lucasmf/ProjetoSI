@@ -66,8 +66,13 @@
 	   <div class="row">
             <!-- center left-->	
          	<div class="col-md-7">
-			                   
-              
+				@disciplina.getMetadicas.size()    
+				@for(metadica <- disciplina.getMetadicas) {
+					<p>@metadica.getComentario</p>
+					@for(dica <- metadica.getDicasAgregadas) {
+						<p>@dica.toString</p>
+					}
+				}
           	</div><!--/col-->
          
             <!--center-right-->
@@ -97,14 +102,14 @@
         <h4 class="modal-title">Adicionar Metadica</h4>
       </div>
       <div class="modal-body">
-        <form method="POST">
+        <form method="POST" action="@routes.Application.addMetadica(disciplina.getId)">
 			<input type="text" name="comentario" placeholder="Comentário" class="form-control">
 			<hr>
 			@for(tema <- disciplina.getTemas) {
 				<p>@tema.getNome</p>
 				<ul class="list-group">
 					@for(dica <- tema.getDicas) {
-						<li class="list-group-item"><input type="checkbox" name="vehicle" value="@dica.getId"> @dica.toString</li>
+						<li class="list-group-item"><input type="checkbox" name="dicas[]" value="@dica.getId"> @dica.toString</li>
 					}
 				</ul>
 			}

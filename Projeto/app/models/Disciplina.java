@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,9 +20,11 @@ public class Disciplina {
 	private String nome;
 	//private String sigla; ??
 	@OneToMany
+	@ElementCollection
 	private List<Tema> temas = new ArrayList<Tema>();
 	
 	@OneToMany
+	@ElementCollection
 	private List<Metadica> metadicas = new ArrayList<Metadica>();
 	
 	

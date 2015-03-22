@@ -7,5 +7,4 @@ public abstract class DicaSimples extends Dica {
 	public DicaSimples() {
 		super();
 	}
-	public abstract String toString();
 }

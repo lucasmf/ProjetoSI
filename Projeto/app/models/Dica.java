@@ -178,4 +178,5 @@ public abstract class Dica implements Comparable{
 	public void setComentarios(List<String> comentarios) {
 		this.comentarios = comentarios;
 	}
+	public abstract String toString();
 }

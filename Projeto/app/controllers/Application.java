@@ -1,7 +1,9 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import models.Comentario;
 import models.Dica;
@@ -11,10 +13,12 @@ import models.DicaDisciplina;
 import models.DicaMaterial;
 import models.DicaSimples;
 import models.Disciplina;
+import models.Metadica;
 import models.Tema;
 import models.Usuario;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
@@ -220,6 +224,28 @@ public class Application extends Controller {
 		dao.flush();
 		return redirect(routes.Application.getPaginaTema(idTema));
 	}
+	
+	 @Transactional
+	    public static Result addMetadica(Long disciplinaId) {
+	        DynamicForm filledForm = Form.form().bindFromRequest();
+	        String comentario = filledForm.get("comentario");
+	        Map<String, String> form = filledForm.data();
+	        List<Dica> dicas = new ArrayList<Dica>();
+
+	        for (int i = 0; i<form.size()-1; i++){
+	            dicas.add(dao.findByEntityId(Dica.class, Long.parseLong(form.get("dicas["+i+"]"))));
+	        }
+	        Disciplina disciplina = (Disciplina)dao.findByEntityId(Disciplina.class, disciplinaId);
+	        Metadica metadica = new Metadica(comentario, dicas);
+            disciplina.addMetadica(metadica);
+            dao.persist(metadica);
+            dao.merge(disciplina);
+            //dao.flush();
+            return redirect(routes.Application.index());
+            
+	    }
+
+	
 	
 	private static Usuario getUsuarioLogado() {
 		return (Usuario) dao.findByAttributeName("Usuario", "email",
