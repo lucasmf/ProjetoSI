@@ -1,5 +1,5 @@
 @(usuario : Usuario, tema : Tema, formDicaMaterial : Form[DicaMaterial], formDicaDiscplina : Form[DicaDisciplina],
-  formDicaAssunto : Form[DicaAssunto], formDicaConselho : Form[DicaConselho]) 
+  formDicaAssunto : Form[DicaAssunto], formDicaConselho : Form[DicaConselho], formComentario : Form[Comentario]) 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -120,8 +120,9 @@
 						      </div>
 						      <div class="modal-body">
 						        @if(dica.usuarioPodeComentar(usuario.getId)) {
-						       		<form action="@routes.Application.adicionarComentario(tema.getId, usuario.getId)" method="POST">
-										<input type="text" name="comentario" placeholder="Comentário" class="form-control" maxlength="100">
+						       		<form action="@routes.Application.adicionarComentario(tema.getId, dica.getId)" method="POST">
+										<input type="text" name="comentario" placeholder="Comentário" value='@formComentario("comentario").value'
+			                  class="form-control">
 										<br>
 										<input type="submit" class="btn btn-primary" value="Comentar">
 									</form>
@@ -150,9 +151,9 @@
 						        <h4 class="modal-title">Razões de discordância</h4>
 						      </div>
 						      <div class="modal-body">
-						      	<p>@dica.getComentarios.size</p>
 						        @for(comment <- dica.getComentarios()) {
-						        	
+						        	@comment
+						        	<hr>
 						        }
 						      </div>
 						    </div><!-- /.modal-content -->

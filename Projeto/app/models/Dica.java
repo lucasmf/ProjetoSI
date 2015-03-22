@@ -60,8 +60,6 @@ public abstract class Dica implements Comparable{
 		this.votantesInapropriacao = new TreeMap<Long, Integer>();
 		this.votosInapropriacao = new Integer(0);
 		this.comentarios = new ArrayList<String>();
-		comentarios.add("a");
-		comentarios.add("b");
 		votos[0] = 0;
 		votos[1] = 0;
 	}

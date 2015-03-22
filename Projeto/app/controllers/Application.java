@@ -3,6 +3,7 @@ package controllers;
 import java.util.LinkedList;
 import java.util.List;
 
+import models.Comentario;
 import models.Dica;
 import models.DicaAssunto;
 import models.DicaConselho;
@@ -32,7 +33,9 @@ public class Application extends Controller {
 			DicaAssunto.class).bindFromRequest();
 	private static Form<DicaConselho> addDicaConselhoForm = Form.form(
 			DicaConselho.class).bindFromRequest();
-
+	private static Form<Comentario> formComentario = Form.form(
+			Comentario.class).bindFromRequest();
+	
 	@Transactional
 	public static Result index() {
 		if (session().get("email") == null) {
@@ -52,7 +55,7 @@ public class Application extends Controller {
 	@Transactional
 	public static Result returnPaginaTema(Usuario usuario, Tema tema) {
 		return ok(paginaTema.render(usuario, tema, addDicaMaterialForm,
-				addDicaDisciplinaForm, addDicaAssuntoForm, addDicaConselhoForm));
+				addDicaDisciplinaForm, addDicaAssuntoForm, addDicaConselhoForm, formComentario));
 	}
 
 	@Transactional
@@ -205,15 +208,12 @@ public class Application extends Controller {
 			return redirect(routes.Login.show());
 		}
 		
-		String comentario = "a";
-		
 		Usuario usuario = getUsuarioLogado();
 		Dica dica = (Dica) dao.findByEntityId(Dica.class, idDica);
 		Tema tema = (Tema) dao.findByEntityId(Tema.class, idTema);
-		dica.addComentario(comentario);
-		for(String aux : dica.getComentarios()) {
-			System.out.println(aux);
-		}
+		formComentario = Form.form(Comentario.class).bindFromRequest();
+		Comentario comentario = formComentario.get();
+		dica.addComentario(comentario.getComentario());
 		tema.sortDicas();
 		dao.merge(dica);
 		dao.merge(tema);
