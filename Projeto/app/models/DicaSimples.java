@@ -4,5 +4,8 @@ import javax.persistence.Entity;
 
 @Entity(name="DicaSimples")
 public abstract class DicaSimples extends Dica {
+	public DicaSimples() {
+		super();
+	}
 	public abstract String toString();
 }

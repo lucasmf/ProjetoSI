@@ -8,10 +8,11 @@ public class DicaAssunto extends DicaSimples {
 	private String assunto;
 	
 	public DicaAssunto() {
-		
+		super();
 	}
 	
 	public DicaAssunto(String assunto) {
+		super();
 		this.assunto = assunto;
 	}
 	

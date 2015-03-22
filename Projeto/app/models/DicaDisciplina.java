@@ -8,10 +8,11 @@ public class DicaDisciplina extends DicaSimples {
 	private String nomeDisciplina;
 
 	public DicaDisciplina() {
-		
+		super();
 	}
 	
 	public DicaDisciplina(String nomeDisciplina, String razao) {
+		super();
 		this.nomeDisciplina = nomeDisciplina;
 		this.razao = razao;
 	}

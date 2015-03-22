@@ -7,10 +7,12 @@ public class DicaMaterial extends DicaSimples {
 	private String linkMaterial;
 	
 	public DicaMaterial() {
+		super();
 		
 	}
 	
 	public DicaMaterial(String link) {
+		super();
 		this.linkMaterial = link;
 		
 	}

@@ -51,8 +51,8 @@ public abstract class Dica implements Comparable{
 	
 	public Dica() {
 		this.votos = new int[2];
-		this.setVotantes(new TreeMap<Long, Integer>());
-		this.setVotantesInapropriacao(new TreeMap<Long, Integer>());
+		this.votantes = new TreeMap<Long, Integer>();
+		this.votantesInapropriacao = new TreeMap<Long, Integer>();
 		this.votosInapropriacao = new Integer(0);
 		votos[0] = 0;
 		votos[1] = 0;
@@ -93,10 +93,10 @@ public abstract class Dica implements Comparable{
 		
 		if(quantidadeDeVotos() >= 20) return;
 		
-		if(getVotantes().get(id) != null) {
+		if(votantes.get(id) != null) {
 			votos[getVotantes().get(id)]--;
 		}
-		getVotantes().put(id, v);
+		votantes.put(id, v);
 		votos[v]++;
 	}
 
