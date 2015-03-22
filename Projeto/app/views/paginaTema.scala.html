@@ -1,4 +1,5 @@
-@(usuario : Usuario, tema : Tema, form : Form[DicaMaterial])
+@(usuario : Usuario, tema : Tema, formDicaMaterial : Form[DicaMaterial], formDicaDiscplina : Form[DicaDisciplina],
+  formDicaAssunto : Form[DicaAssunto], formDicaConselho : Form[DicaConselho]) 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -180,10 +181,41 @@
         <h4 class="modal-title">Adiconar Dica</h4>
       </div>
       <div class="modal-body">
-         @helper.form(routes.Application.adicionarDica(tema.getId())) {
+         <a title="Add Dica de Material" data-toggle="modal" href="#addDicaMaterialModal">
+         Adicionar Dica de Material útil
+         </a>
+         <hr>
+         <a title="Add Dica de Disciplina" data-toggle="modal" href="#addDicaDisciplinaModal">
+         Adicionar Dica de Disciplinas 
+         </a>
+         <hr>
+         <a title="Add Dica de Assunto" data-toggle="modal" href="#addDicaAssuntoModal">
+         Adicionar Dica de Assunto 
+         </a>
+         <hr>
+         <a title="Add Dica de Conseho" data-toggle="modal" href="#addDicaConselhoModal">
+          Adicionar Dica de Conselho 
+         </a>
+         <hr>
+      </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dalog -->
+</div><!-- /.modal -->
+
+
+<div class="modal" id="addDicaMaterialModal"> <!--modal Dica material-->
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Adiconar Dica</h4>
+      </div>
+      <div class="modal-body">
+         @helper.form(routes.Application.adicionarDicaMaterial(tema.getId())) {
 				 <br>
 			       <p>
-				      <input type="url" name="linkMaterial" placeholder="Link do Material" value='@form("linkMaterial").value'
+				      <input type="url" name="linkMaterial" placeholder="Link do Material" value='@formDicaMaterial("linkMaterial").value'
 			                  class="form-control">
 			       </p>
 			   	<div align="center">
@@ -193,12 +225,93 @@
 		}
       </div>
       <div class="modal-footer">
-        <a href="#" class="btn">Close</a>
-        <a href="#" class="btn btn-primary">Save changes</a>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dalog -->
-</div><!-- /.modal -->
+</div><!-- /.modal Add Dica Material -->
+
+<div class="modal" id="addDicaDisciplinaModal"> <!--modal Dica Disciplina-->
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Adiconar Dica</h4>
+      </div>
+      <div class="modal-body">
+         @helper.form(routes.Application.adicionarDicaDisciplina(tema.getId())) {
+				 <br>
+			       <p>
+				      <input type="text" name="nomeDisciplina" placeholder="Nome da Disciplina" value='@formDicaDiscplina("nomeDisciplina").value'
+			                  class="form-control">
+			       </p>
+			       <p>
+				      <input type="text" name="razao" placeholder="Razão para Sugerir a disciplina" value='@formDicaDiscplina("razao").value'
+			                  class="form-control">
+			       </p>
+			   	<div align="center">
+				       <button class="btn btn-primary" type="submit">Adicionar</button>
+			     </div>
+			    <br>
+		}
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dalog -->
+</div><!-- /.modal add Dica Disciplina -->
+
+<div class="modal" id="addDicaAssuntoModal"> <!--modal Dica Assunto -->
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Adiconar Dica</h4>
+      </div>
+      <div class="modal-body">
+         @helper.form(routes.Application.adicionarDicaAssunto(tema.getId())) {
+				 <br>
+			       <p>
+				      <input type="text" name="assunto" placeholder="Assunto" value='@formDicaDiscplina("assunto").value'
+			                  class="form-control">
+			       </p>
+			   	<div align="center">
+				       <button class="btn btn-primary" type="submit">Adicionar</button>
+			     </div>
+			    <br>
+		}
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dalog -->
+</div><!-- /.modal Add Dica Assunto -->
+
+<div class="modal" id="addDicaConselhoModal"> <!--modal Dica Conselho-->
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Adiconar Dica</h4>
+      </div>
+      <div class="modal-body">
+         @helper.form(routes.Application.adicionarDicaConselho(tema.getId())) {
+				 <br>
+			       <p>
+				      <input type="text" name="conselho" placeholder="Conselho" value='@formDicaDiscplina("conselho").value'
+			                  class="form-control">
+			       </p>
+			   	<div align="center">
+				       <button class="btn btn-primary" type="submit">Adicionar</button>
+			     </div>
+			    <br>
+		}
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dalog -->
+</div><!-- /.modal add Dica Conselho -->
+
 	 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	</body>

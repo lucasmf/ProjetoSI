@@ -9,7 +9,10 @@ GET     /                           controllers.Application.index()
 GET		/tema/:id					controllers.Application.getPaginaTema(id : Long)
 GET		/tema/:id/:v				controllers.Application.votar(id : Long, v : Integer)
 GET		/tema/:idTema/:idDica/:v	controllers.Application.votarDica(idTema : Long, idDica : Long, v : Integer)
-POST    /dica/:id                   controllers.Application.adicionarDica(id : Long)
+POST    /dicaMaterial/:id           controllers.Application.adicionarDicaMaterial(id : Long)
+POST    /dicaDisciplina/:id         controllers.Application.adicionarDicaDisciplina(id : Long)
+POST    /dicaAssunto/:id            controllers.Application.adicionarDicaAssunto(id : Long)
+POST    /dicaConselho/:id           controllers.Application.adicionarDicaConselho(id : Long)
 
 # Login
 GET     /login                      controllers.Login.show()

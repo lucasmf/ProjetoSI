@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 @Entity(name="DicaAssunto")
 public class DicaAssunto extends DicaSimples {
 	
+	private static final String BACKGROUND_COLOR = "rgba(255, 102, 0, 0.2)";
+	private static final String COLOR = "orange";
 	private String assunto;
 	
 	public DicaAssunto() {
@@ -17,11 +19,11 @@ public class DicaAssunto extends DicaSimples {
 	}
 	
 	public String getColor() {
-		return "orange";
+		return COLOR;
 	}
 	
 	public String getBackgroundColor() {
-		return "rgba(255, 102, 0, 0.2)";
+		return BACKGROUND_COLOR;
 	}	
 	
 	@Override
