@@ -15,6 +15,14 @@ public class DicaAssunto extends DicaSimples {
 		this.assunto = assunto;
 	}
 	
+	public String getColor() {
+		return "orange";
+	}
+	
+	public String getBackgroundColor() {
+		return "rgba(255, 102, 0, 0.2)";
+	}	
+	
 	@Override
 	public String toString() {
 		return "Assunto que você precisa saber: " + assunto;

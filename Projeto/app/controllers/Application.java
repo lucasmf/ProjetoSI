@@ -54,6 +54,9 @@ public class Application extends Controller {
 		
 		Tema tema = (Tema)dao.findByEntityId(Tema.class, id);
 		if(tema == null) return badRequest();
+		tema.sortDicas();
+		dao.merge(tema);
+		dao.flush();
 		return ok(paginaTema.render(usuario, tema, addDicaForm));
 	}
 	
@@ -71,6 +74,7 @@ public class Application extends Controller {
         Tema tema = (Tema)dao.findByEntityId(Tema.class, id);
 		if(tema == null) return badRequest();
 		tema.votar(usuario, v);
+		tema.sortDicas();
 		dao.merge(tema);
 		dao.flush();
 		return ok(paginaTema.render(usuario, tema, addDicaForm));
@@ -91,6 +95,7 @@ public class Application extends Controller {
 		DicaSimples dica = addDicaForm.get();
 		dao.persist(dica);
 		tema.addDica(dica);
+		tema.sortDicas();
 		dao.merge(tema);
 		dao.flush();
 		return ok(paginaTema.render(getUsuarioLogado(), tema, addDicaForm));

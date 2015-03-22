@@ -147,7 +147,7 @@ public class Tema {
 	}
 
 	public void sortDicas() {
-		Collections.reverse(this.dicas);
+		Collections.sort(this.dicas);
 	}
 	
 	/*

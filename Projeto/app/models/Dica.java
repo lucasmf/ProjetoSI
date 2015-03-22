@@ -22,15 +22,31 @@ public abstract class Dica implements Comparable{
 	
 	//private HashMap<Long, Avaliacao> avaliacoes;
 	
+	protected String color;
+	
+	protected String backgroundColor;
+	
+	public String getColor() {
+		return "";
+	}
+	
+	public String getBackgroundColor() {
+		return "";
+	}
+	
+	public void setColor(String color) {
+		this.color = color;
+	}
+	
 	public Dica() {
 		this.votos = new int[2];
 		votos[0] = 0;
 		votos[1] = 0;
 	}
 	
-	public double getAprovacao(){
-		if(votos[0]+votos[1] == 0) return 0.0;
-		return (double)votos[1]/(votos[0]+votos[1]);
+	public int getAprovacao(){
+		if(votos[0]+votos[1] == 0) return 0;
+		return (votos[1]*100/(votos[0]+votos[1]));
 	}
 	
 	public int getVotosNegavitos() {
@@ -71,9 +87,8 @@ public abstract class Dica implements Comparable{
 	
 	@Override
 	public int compareTo(Object o) {
-		if(o.getClass() != Dica.class) return -1;
 		Dica other = (Dica)o;
-		return Double.compare(this.getAprovacao(), other.getAprovacao());
+		return Integer.compare(other.getAprovacao(), this.getAprovacao());
 	}
 	
 /*	public void addAvaliacao(Usuario usuario, Avaliacao avaliacao) {

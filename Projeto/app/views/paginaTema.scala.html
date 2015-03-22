@@ -9,6 +9,7 @@
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+		
 	</head>
 	<body>
 <!-- Header -->
@@ -90,9 +91,9 @@
          	<div class="col-md-7">
               
              @for(dica <- tema.getDicas()) {
-             	<div class="panel panel-default">
-                  <div class="panel-heading">
-                  	<h4>Dica # @tema.getDicas().indexOf(dica)
+             	<div class="panel panel-default" style="border-color:@dica.getColor">
+                  <div class="panel-heading" style="background-color:@dica.getBackgroundColor">
+                  	<h4>Dica #@tema.getDicas().indexOf(dica)
 		                <div class="pull-right">
 					      	<a href="/tema/@tema.getId()/@dica.getId()/1"><span style="color:green" class="glyphicon glyphicon-success glyphicon-chevron-up"></span></a>
 		                    @dica.getAprovacao%  
@@ -117,10 +118,10 @@
        			</ul>  
               
                 <hr>
-        		<span style="color:green"  class="glyphicon glyphicon-info-sign">Dica de Material </span> <br>	
-                <span style="color:blue"  class="glyphicon glyphicon-info-sign"></span> <br>
-                <span style="color:red"  class="glyphicon glyphicon-info-sign"></span> <br>
-                <span style="color:orange"  class="glyphicon glyphicon-info-sign"></span>                                                                                                                       <hr>
+        		<span style="color:green" class="glyphicon glyphicon-info-sign"> Dica de Material </span> <br>	
+                <span style="color:blue" class="glyphicon glyphicon-info-sign"> Dica Conselho</span> <br>
+                <span style="color:red" class="glyphicon glyphicon-info-sign"> Dica Disciplina</span> <br>
+                <span style="color:orange" class="glyphicon glyphicon-info-sign"> Dica Assunto</span>                                                                                                                       <hr>
 			</div><!--/col-span-6-->
      
        </div><!--/row-->
