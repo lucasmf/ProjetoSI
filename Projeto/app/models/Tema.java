@@ -31,7 +31,6 @@ public class Tema {
 
 	@OneToMany
 	private List<DicaSimples> dicas = new LinkedList<DicaSimples>();
-	// private String glyphicon;
 
 	@ManyToOne
 	private Disciplina disciplina;
@@ -89,7 +88,6 @@ public class Tema {
 		double ret = 0;
 		Integer total = 0;
 		for (Integer i = -2; i <= 2; i++) {
-			System.out.println( quantidadeVotos.get(i));
 			ret += quantidadeVotos.get(i).intValue() * (double) i;
 			total += quantidadeVotos.get(i);
 		}
@@ -146,12 +144,8 @@ public class Tema {
 		this.dicas = dicas;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void sortDicas() {
 		Collections.sort(this.dicas);
 	}
-	
-	/*
-	 * public String getGlyphicon() { return glyphicon; } public void
-	 * setGlyphicon(String glyphicon) { this.glyphicon = glyphicon; }
-	 */
 }

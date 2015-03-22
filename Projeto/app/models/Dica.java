@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,8 +29,6 @@ public abstract class Dica implements Comparable{
 	@ManyToOne(fetch=FetchType.LAZY, cascade= CascadeType.ALL)
 	private Disciplina disciplina;
 	
-	//private HashMap<Long, Avaliacao> avaliacoes;
-	
 	protected String color;
 	
 	protected String backgroundColor;
@@ -54,8 +51,8 @@ public abstract class Dica implements Comparable{
 	
 	public Dica() {
 		this.votos = new int[2];
-		this.votantes = new TreeMap<Long, Integer>();
-		this.votantesInapropriacao = new TreeMap<Long, Integer>();
+		this.setVotantes(new TreeMap<Long, Integer>());
+		this.setVotantesInapropriacao(new TreeMap<Long, Integer>());
 		this.votosInapropriacao = new Integer(0);
 		votos[0] = 0;
 		votos[1] = 0;
@@ -86,9 +83,9 @@ public abstract class Dica implements Comparable{
 		
 		if(v == 2) {
 			if(votosInapropriacao == null) votosInapropriacao = new Integer(0);
-			if(votantesInapropriacao.get(id) == null) {
+			if(getVotantesInapropriacao().get(id) == null) {
 				votosInapropriacao++;
-				votantesInapropriacao.put(id, 2);
+				getVotantesInapropriacao().put(id, 2);
 			}
 			return;
 		}
@@ -96,10 +93,10 @@ public abstract class Dica implements Comparable{
 		
 		if(quantidadeDeVotos() >= 20) return;
 		
-		if(votantes.get(id) != null) {
-			votos[votantes.get(id)]--;
+		if(getVotantes().get(id) != null) {
+			votos[getVotantes().get(id)]--;
 		}
-		votantes.put(id, v);
+		getVotantes().put(id, v);
 		votos[v]++;
 	}
 
@@ -142,26 +139,20 @@ public abstract class Dica implements Comparable{
 		if(votosInapropriacao == null) votosInapropriacao = new Integer(0);
 		return votosInapropriacao < 3;
 	}
-	
-//	public int getVotosInapropiacao() {
-//		return votosInapropiacao;
-//	}
-//
-//	public void setVotosInapropiacao(int votosInapropiacao) {
-//		this.votosInapropiacao = votosInapropiacao;
-//	}
 
-	
-	
-/*	public void addAvaliacao(Usuario usuario, Avaliacao avaliacao) {
-		
+	public Map <Long, Integer> getVotantes() {
+		return votantes;
 	}
 
-	public HashMap<Long, Avaliacao> getAvaliacoes() {
-		return avaliacoes;
+	public void setVotantes(Map <Long, Integer> votantes) {
+		this.votantes = votantes;
 	}
 
-	public void setAvaliacoes(HashMap<Long, Avaliacao> avaliacoes) {
-		this.avaliacoes = avaliacoes;
-	}*/
+	public Map <Long, Integer> getVotantesInapropriacao() {
+		return votantesInapropriacao;
+	}
+
+	public void setVotantesInapropriacao(Map <Long, Integer> votantesInapropriacao) {
+		this.votantesInapropriacao = votantesInapropriacao;
+	}
 }
