@@ -28,8 +28,8 @@
 	          <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
 	            <i class="glyphicon glyphicon-user"></i> @usuario.getNome <span class="caret"></span></a>
 	          <ul id="menu" class="dropdown-menu" role="menu">
+	          	<li><a href="/">Página Principal</a></li>
 	            <li><a href="/logout">logout</a></li>
-	            <li><a href="/">Página Principal</a></li>
 	          </ul>
 	        </li>
 	      </ul>
@@ -91,21 +91,23 @@
          	<div class="col-md-7">
               
              @for(dica <- tema.getDicas()) {
-             	<div class="panel panel-default" style="border-color:@dica.getColor">
-                  <div class="panel-heading" style="background-color:@dica.getBackgroundColor">
-                  	<h4>Dica #@tema.getDicas().indexOf(dica)
-		                <div class="pull-right">
-					      	<a href="/tema/@tema.getId()/@dica.getId()/1"><span style="color:green" class="glyphicon glyphicon-success glyphicon-chevron-up"></span></a>
-		                    @dica.getAprovacao%  
-		                  	<a href="/tema/@tema.getId()/@dica.getId()/0"><span style="color:red" class="glyphicon glyphicon-danger glyphicon-chevron-down"></span></a>                  
-	                  	</div>
-	                  </h4>
-                  </div>
-                  <div class="panel-body">
-                   @dica.toString()
-                  <br>
-                  </div><!--/panel-body-->
-               </div><!--/panel-->     
+             	
+	             	<div class="panel panel-default" style="border-color:@dica.getColor">
+	                  <div class="panel-heading" style="background-color:@dica.getBackgroundColor">
+	                  	<h4> Dica #@tema.getDicas().indexOf(dica)
+			                <div class="pull-right">
+						      	<a href="/tema/@tema.getId()/@dica.getId()/1"><span style="color:green" class="glyphicon glyphicon-success glyphicon-chevron-up"></span></a>
+			                    @dica.getAprovacao%  
+			                  	<a href="/tema/@tema.getId()/@dica.getId()/0"><span style="color:red" class="glyphicon glyphicon-danger glyphicon-chevron-down"></span></a>                  
+		                  	</div>
+		                  </h4>
+	                  </div>
+	                  <div class="panel-body">
+	                   @dica.toString()
+	                  <br>
+	                  </div><!--/panel-body-->
+	               </div><!--/panel-->    
+	              
              }
               
           	</div><!--/col-->

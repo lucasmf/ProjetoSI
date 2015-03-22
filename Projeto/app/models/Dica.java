@@ -1,6 +1,10 @@
 package models;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,8 +18,11 @@ public abstract class Dica implements Comparable{
 	@Id
 	@GeneratedValue
 	private Long id;
-
+	
 	private int votos[];
+	
+	@ElementCollection
+	private Map <Long, Integer> votantes;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade= CascadeType.ALL)
 	private Disciplina disciplina;
@@ -34,12 +41,17 @@ public abstract class Dica implements Comparable{
 		return "";
 	}
 	
+	public void setBackGroundColor(String color) {
+		this.backgroundColor = color;
+	}
+	
 	public void setColor(String color) {
 		this.color = color;
 	}
 	
 	public Dica() {
 		this.votos = new int[2];
+		this.votantes = new TreeMap<Long, Integer>();
 		votos[0] = 0;
 		votos[1] = 0;
 	}
@@ -61,10 +73,26 @@ public abstract class Dica implements Comparable{
 		return disciplina;
 	}
 	
-	public void votar(int v) {
+	private int quantidadeDeVotos() {
+		return votos[0]+votos[1];
+	}
+	
+	public void votar(Long id, int v) {
+		
+		
+		if(quantidadeDeVotos() >= 20) return;
+		
+		if(votantes.get(id) != null) {
+			votos[votantes.get(id)]--;
+		}
+		votantes.put(id, v);
 		votos[v]++;
 	}
 
+	//public boolean isApropriada() {
+//		return votosInapropriacao < 3;
+	//}
+	
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
@@ -90,6 +118,8 @@ public abstract class Dica implements Comparable{
 		Dica other = (Dica)o;
 		return Integer.compare(other.getAprovacao(), this.getAprovacao());
 	}
+
+	
 	
 /*	public void addAvaliacao(Usuario usuario, Avaliacao avaliacao) {
 		

@@ -87,7 +87,7 @@ public class Login extends Controller {
 	@Transactional
 	 public static Result logout() {
 	       session().clear();
-	       return redirect(routes.Application.index());
-	    }
-
+	       return redirect(routes.Application.index());   
+	}
+	
 }

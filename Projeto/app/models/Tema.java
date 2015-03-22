@@ -23,10 +23,10 @@ public class Tema {
 
 	private String nome;
 	
-	 @ElementCollection
+	@ElementCollection
 	private Map <Long, Integer> votos;
 	
-	 @ElementCollection
+	@ElementCollection
 	private Map <Integer, Integer> quantidadeVotos;
 
 	@OneToMany

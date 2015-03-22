@@ -112,7 +112,8 @@ public class Application extends Controller {
 		}
 		Dica dica = (Dica)dao.findByEntityId(Dica.class, idDica);
 		Tema tema = (Tema)dao.findByEntityId(Tema.class, idTema);
-		dica.votar(v);
+		Usuario usuario = getUsuarioLogado();
+		dica.votar(usuario.getId(), v);
 		dao.merge(dica);
 		tema = (Tema)dao.findByEntityId(Tema.class, idTema);
 		tema.sortDicas();
