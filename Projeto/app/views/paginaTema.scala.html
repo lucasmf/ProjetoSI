@@ -67,11 +67,13 @@
 		      </div>
 		      <br><br>
 		      <div align="center" btn-group" role="group">
+		      		(Muito fácil)
  					<a href="/tema/@tema.getId/-2" ><button type="button" class="btn btn-default">-2</button></a>
  					<a href="/tema/@tema.getId/-1" ><button type="button" class="btn btn-default">-1</button></a>
  					<a href="/tema/@tema.getId/0" ><button type="button" class="btn btn-default">0</button></a>
  					<a href="/tema/@tema.getId/1" ><button type="button" class="btn btn-default">1</button></a>
  					<a href="/tema/@tema.getId/2" ><button type="button" class="btn btn-default">2</button></a>
+			  		(Muito difícil)
 			  </div>
 			  <br>
 			  <hr>
@@ -95,7 +97,7 @@
              	@if(dica.isApropriada) {
 	             	<div class="panel panel-default" style="border-color:@dica.getColor">
 	                  <div class="panel-heading" style="background-color:@dica.getBackgroundColor">
-	                  	<h4>Dica #@tema.getDicas().indexOf(dica)
+	                  	<h4>Dica #@(tema.getDicas().indexOf(dica)+1)
 	                  		<div class="pull-right">
 				                <a href="/tema/@tema.getId()/@dica.getId()/1"><span style="color:green" class="glyphicon glyphicon-success glyphicon-chevron-up"></span></a>
 				            	@dica.getAprovacao%  
