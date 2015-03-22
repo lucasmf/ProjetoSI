@@ -94,18 +94,29 @@
              	@if(dica.isApropriada) {
 	             	<div class="panel panel-default" style="border-color:@dica.getColor">
 	                  <div class="panel-heading" style="background-color:@dica.getBackgroundColor">
-	                  	<h4><a href="/tema/@tema.getId()/@dica.getId()/2"><i class="glyphicon glyphicon-ban-circle"></i></a> Dica #@tema.getDicas().indexOf(dica)
-			                <div class="pull-right">
-						      	<a href="/tema/@tema.getId()/@dica.getId()/1"><span style="color:green" class="glyphicon glyphicon-success glyphicon-chevron-up"></span></a>
-			                    @dica.getAprovacao%  
-			                  	<a href="/tema/@tema.getId()/@dica.getId()/0"><span style="color:red" class="glyphicon glyphicon-danger glyphicon-chevron-down"></span></a>                  
-		                  	</div>
-		                  </h4>
+	                  	<h4>Dica #@tema.getDicas().indexOf(dica)
+	                  		<div class="pull-right">
+				                <a href="/tema/@tema.getId()/@dica.getId()/1"><span style="color:green" class="glyphicon glyphicon-success glyphicon-chevron-up"></span></a>
+				            	@dica.getAprovacao%  
+				           		<a href="/tema/@tema.getId()/@dica.getId()/0"><span style="color:red" class="glyphicon glyphicon-danger glyphicon-chevron-down"></span></a>
+		               		</div>
+		                </h4>
 	                  </div>
 	                  <div class="panel-body">
-	                   @dica.toString()
-	                  <br>
+		                   @dica.toString()
+		                  <br>
 	                  </div><!--/panel-body-->
+	                  <div class="panel-footer">
+	                  	
+	                  	<a title="Escrever comentário" href="#">Comentar <i class="glyphicon glyphicon-pencil"></i></a>
+	                  	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	                  	<a title="Vizualizar comentários" href="#">Vizualizar Comentários <i class="glyphicon glyphicon-list-alt"></i></a>
+	          		    
+	                  	<div class="pull-right">
+							<a title="Denunciar abuso" href="/tema/@tema.getId()/@dica.getId()/2"><i class="glyphicon glyphicon-ban-circle"></i></a>               
+		              	</div>
+	                  	
+	                  </div>
 	               </div><!--/panel-->    
 	           }
 	        
