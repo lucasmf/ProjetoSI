@@ -155,4 +155,9 @@ public abstract class Dica implements Comparable{
 	public void setVotantesInapropriacao(Map <Long, Integer> votantesInapropriacao) {
 		this.votantesInapropriacao = votantesInapropriacao;
 	}
+	
+	public boolean usuarioPodeComentar(Long id) {
+		if(votantes.get(id) == null) return false;
+		return votantes.get(id).equals(0);
+	}
 }
