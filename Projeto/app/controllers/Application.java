@@ -193,9 +193,35 @@ public class Application extends Controller {
 		dao.merge(tema);
 		dao.flush();
 		return returnPaginaTema(usuario, tema);
-
 	}
 
+	@Transactional
+	public static Result adicionarComentario(Long idTema, Long idDica) {
+		if (session().get("email") == null) {
+			return redirect(routes.Login.show());
+		}
+		if (naoExisteUsuarioLogado()) {
+			session().clear();
+			return redirect(routes.Login.show());
+		}
+		
+		String comentario = "a";
+		
+		Usuario usuario = getUsuarioLogado();
+		Dica dica = (Dica) dao.findByEntityId(Dica.class, idDica);
+		Tema tema = (Tema) dao.findByEntityId(Tema.class, idTema);
+		dica.addComentario(comentario);
+		for(String aux : dica.getComentarios()) {
+			System.out.println(aux);
+		}
+		tema.sortDicas();
+		dao.merge(dica);
+		dao.merge(tema);
+		dao.flush();
+		return returnPaginaTema(usuario, tema);
+		
+	}
+	
 	private static Usuario getUsuarioLogado() {
 		return (Usuario) dao.findByAttributeName("Usuario", "email",
 				session().get("email")).get(0);

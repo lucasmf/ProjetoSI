@@ -120,14 +120,17 @@
 						      </div>
 						      <div class="modal-body">
 						        @if(dica.usuarioPodeComentar(usuario.getId)) {
-									<input type="text" name="linkMaterial" placeholder="Comentário" class="form-control" maxlength="100">
+						       		<form action="@routes.Application.adicionarComentario(tema.getId, usuario.getId)" method="POST">
+										<input type="text" name="comentario" placeholder="Comentário" class="form-control" maxlength="100">
+										<br>
+										<input type="submit" class="btn btn-primary" value="Comentar">
+									</form>
 								} else {
 									<div class="alert alert-warning" role="alert">Você precisa dar um voto negativo na dica para pode comentar.</div>
 								
-									<input type="text" name="linkMaterial" placeholder="Comentário" class="form-control" disabled>
+									<input type="text" name="comentarioDisabled" placeholder="Comentário" class="form-control" disabled>
+									<input type="submit" class="btn btn-primary" value="Comentar" disabled>
 								}
-									 
-								
 						      </div>
 						      <div class="modal-footer">
 						        <a href="#" class="btn">Close</a>
@@ -137,8 +140,24 @@
 						  </div><!-- /.modal-dalog -->
 						</div><!-- /.modal -->
 	                  	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-	                  	<a title="Vizualizar comentários" href="#">Vizualizar Comentários <i class="glyphicon glyphicon-list-alt"></i></a>
-	          		    
+	                  	
+	          		    <a title="Escrever comentário" data-toggle="modal" href="#visualizarComentariosModal@dica.getId">Visualizar comentários <i class="glyphicon glyphicon-list-alt"></i></a>
+	                  	<div class="modal" id="visualizarComentariosModal@dica.getId">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						        <h4 class="modal-title">Razões de discordância</h4>
+						      </div>
+						      <div class="modal-body">
+						      	<p>@dica.getComentarios.size</p>
+						        @for(comment <- dica.getComentarios()) {
+						        	
+						        }
+						      </div>
+						    </div><!-- /.modal-content -->
+						  </div><!-- /.modal-dalog -->
+						</div><!-- /.modal -->
 	                  	<div class="pull-right">
 							<a title="Denunciar abuso" href="/tema/@tema.getId()/@dica.getId()/2"><i class="glyphicon glyphicon-ban-circle"></i></a>               
 		              	</div>

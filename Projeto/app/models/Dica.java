@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -22,6 +24,9 @@ public abstract class Dica implements Comparable{
 	private int votos[];
 	
 	private Integer votosInapropriacao = 0;
+	
+	@ElementCollection
+	private List<String> comentarios;
 	
 	@ElementCollection
 	private Map <Long, Integer> votantes, votantesInapropriacao;
@@ -54,6 +59,9 @@ public abstract class Dica implements Comparable{
 		this.votantes = new TreeMap<Long, Integer>();
 		this.votantesInapropriacao = new TreeMap<Long, Integer>();
 		this.votosInapropriacao = new Integer(0);
+		this.comentarios = new ArrayList<String>();
+		comentarios.add("a");
+		comentarios.add("b");
 		votos[0] = 0;
 		votos[1] = 0;
 	}
@@ -124,7 +132,7 @@ public abstract class Dica implements Comparable{
 	@Override
 	public int compareTo(Object o) {
 		Dica other = (Dica)o;
-		return Integer.compare(other.getAprovacao(), this.getAprovacao());
+		return Integer.compare(other.getAprovacao(), this.getAprovacao()) == 0? -1:Integer.compare(other.getAprovacao(), this.getAprovacao());
 	}
 
 	public Integer getVotosInapropiacao() {
@@ -159,5 +167,17 @@ public abstract class Dica implements Comparable{
 	public boolean usuarioPodeComentar(Long id) {
 		if(votantes.get(id) == null) return false;
 		return votantes.get(id).equals(0);
+	}
+
+	public void addComentario(String comentario) {
+		this.comentarios.add(comentario);
+	}
+	
+	public List<String> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<String> comentarios) {
+		this.comentarios = comentarios;
 	}
 }

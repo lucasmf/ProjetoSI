@@ -13,6 +13,7 @@ POST    /dicaMaterial/:id           controllers.Application.adicionarDicaMateria
 POST    /dicaDisciplina/:id         controllers.Application.adicionarDicaDisciplina(id : Long)
 POST    /dicaAssunto/:id            controllers.Application.adicionarDicaAssunto(id : Long)
 POST    /dicaConselho/:id           controllers.Application.adicionarDicaConselho(id : Long)
+POST    /adicionaComentario/:idTema/:idDica  controllers.Application.adicionarComentario(idTema : Long, idDica : Long)
 
 # Login
 GET     /login                      controllers.Login.show()
