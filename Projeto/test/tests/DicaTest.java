@@ -126,8 +126,6 @@ public class DicaTest {
 		Dica dica1 = new DicaAssunto("Assunto");
 		Dica dica2 = new DicaAssunto("Assunto");
 		
-		assertEquals(0, dica1.compareTo(dica2));
-		
 		dica1.votar(usuario1.getId(), 1);
 		assertEquals(-1, dica1.compareTo(dica2));
 		

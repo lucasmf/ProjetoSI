@@ -46,7 +46,6 @@ public class Login extends Controller {
 	
 	@Transactional
 	public static Result signUp() {
-		System.out.println("oi");
 		Form<Usuario> signUpForm = Form.form(Usuario.class).bindFromRequest();
 		Usuario u = signUpForm.get();
 		String email = u.getEmail();

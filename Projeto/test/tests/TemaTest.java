@@ -8,16 +8,21 @@ import java.util.Map;
 import models.DicaSimples;
 import models.Tema;
 import models.Usuario;
+import models.dao.GenericDAO;
+import models.dao.GenericDAOImpl;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class TemaTest {
+import base.AbstractTest;
 
+public class TemaTest extends AbstractTest {
+	
+	private static GenericDAO dao = new GenericDAOImpl();
 	public static Usuario usuario1, usuario2, usuario3;
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp2() throws Exception {
 		usuario1 = new Usuario();
 		usuario2 = new Usuario();
 		usuario3 = new Usuario();
@@ -27,7 +32,7 @@ public class TemaTest {
 	}
 	
 	@Test
-	public void testIncializaTema() {
+	public void deveInicializarTemaCorretamente() {
 		Tema tema = new Tema("tema");
 		Map <Long, Integer> votos = tema.getVotos();
 		Map <Integer, Integer> quantidadeVotos = tema.getQuantidadeVotos();
@@ -44,7 +49,25 @@ public class TemaTest {
 	}
 	
 	@Test
-	public void testVotar1() {
+	public void deveInicializarBDSemTemas() {
+		List<Tema> temas = dao.findAllByClassName("Tema");
+		assertEquals(0, temas.size());
+	} 
+	
+	@Test
+	public void devePersistirTemaNoBD() {
+		List<Tema> temas = dao.findAllByClassName("Tema");
+		assertEquals(0, temas.size());
+		Tema tema = new Tema("OO");
+		dao.persist(tema);
+		dao.flush();
+		temas = dao.findAllByClassName("Tema");
+		assertEquals(1, temas.size());
+	} 
+	
+	
+	@Test
+	public void deveVotarCorretamente1() {
 		Tema tema = new Tema("tema");
 		assertEquals(0.0, tema.getMedia(), 1e-5);
 		assertEquals(0.0, tema.getMediana(), 1e-5);
@@ -57,7 +80,7 @@ public class TemaTest {
 	}
 	
 	@Test
-	public void testVotar2() {
+	public void deveVotarCorretamente2() {
 		Tema tema = new Tema("tema");
 		tema.votar(usuario1, 2);
 		assertEquals(2.0, tema.getMedia(), 1e-5);
@@ -70,7 +93,7 @@ public class TemaTest {
 		assertEquals(1.5, tema.getMediana(), 1e-5);
 	}
 	
-	public void testGetMediana() {
+	public void deveCalcularMedianaCorretamete() {
 		Tema tema = new Tema("tema");
 		tema.votar(usuario1, 2);
 		assertEquals(2.0, tema.getMediana(), 1e-5);
@@ -82,7 +105,7 @@ public class TemaTest {
 		assertEquals(2, tema.getMediana(), 1e-5);
 	}
 	
-	public void testGetMedia() {
+	public void deveCalcularMediaCorretamente() {
 		Tema tema = new Tema("tema");
 		tema.votar(usuario1, 2);
 		assertEquals(2.0, tema.getMedia(), 1e-5);
