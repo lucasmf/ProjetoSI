@@ -11,6 +11,7 @@ import models.Metadica;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import base.AbstractTest;
@@ -20,6 +21,13 @@ public class DisciplinaTest extends AbstractTest {
 	
 	private static GenericDAO dao = new GenericDAOImpl();
 	
+//	@Before
+//	public void setUp() {
+//		Disciplina disciplina = new Disciplina("SI");
+//		dao.persist(disciplina);
+//		dao.flush();
+//	}
+	
 	@Test
 	public void deveInicializarDisciplinaCorretamente() {
 		Disciplina disciplina = new Disciplina("SI");
@@ -28,20 +36,20 @@ public class DisciplinaTest extends AbstractTest {
 	}
 	
 	@Test
-	public void deveInicializarDaoSemDisciplinas() {
+	public void deveInicializarDBComUmaDisciplina() {
 		List <Disciplina> disciplinas = dao.findAllByClassName("Disciplina");
-		assertEquals(0, disciplinas.size());
+		assertEquals(1, disciplinas.size());
 	}
 	
 	@Test
 	public void deveSalvarDisciplinaNoBD() {
 		List <Disciplina> disciplinas = dao.findAllByClassName("Disciplina");
-		assertEquals(0, disciplinas.size());
-		Disciplina disciplina = new Disciplina("SI");
+		int before = disciplinas.size();
+		Disciplina disciplina = new Disciplina("Disciplina1");
 		dao.persist(disciplina);
 		dao.flush();
 		disciplinas = dao.findAllByClassName("Disciplina");
-		assertEquals(1, disciplinas.size());
+		assertEquals(1, disciplinas.size()-before);
 	}
 	
 	@Test
@@ -51,6 +59,7 @@ public class DisciplinaTest extends AbstractTest {
 		
 		Metadica metadica1 = new Metadica("1", new ArrayList<Dica>());
 		metadica1.votar((long) 1, 1);
+		metadica1.votar((long) 1, 0);
 		
 		Metadica metadica2 = new Metadica("2", new ArrayList<Dica>());
 		metadica2.votar((long) 1, 1);

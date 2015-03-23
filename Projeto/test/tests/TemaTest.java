@@ -49,20 +49,20 @@ public class TemaTest extends AbstractTest {
 	}
 	
 	@Test
-	public void deveInicializarBDSemTemas() {
+	public void deveInicializarBDComTemasPadrao() {
 		List<Tema> temas = dao.findAllByClassName("Tema");
-		assertEquals(0, temas.size());
+		assertEquals(12, temas.size());
 	} 
 	
 	@Test
 	public void devePersistirTemaNoBD() {
 		List<Tema> temas = dao.findAllByClassName("Tema");
-		assertEquals(0, temas.size());
-		Tema tema = new Tema("OO");
+		int before = temas.size();
+		Tema tema = new Tema("Tema1");
 		dao.persist(tema);
 		dao.flush();
 		temas = dao.findAllByClassName("Tema");
-		assertEquals(1, temas.size());
+		assertEquals(1, temas.size()-before);
 	} 
 	
 	

@@ -22,21 +22,21 @@ public class Global extends GlobalSettings {
 		if (dao.findByAttributeName("Tema", "nome", nome) != null) {
 			Tema tema = new Tema(nome);
 			
-			DicaSimples dica = new DicaMaterial("material");
-			dao.persist(dica);
-			tema.addDica(dica);
-			
-			dica = new DicaAssunto("Assunto");
-			dao.persist(dica);
-			tema.addDica(dica);
-			
-			dica = new DicaDisciplina("Disciplina", "Razao");
-			dao.persist(dica);
-			tema.addDica(dica);
-			
-			dica = new DicaConselho("conselho");
-			dao.persist(dica);
-			tema.addDica(dica);
+//			DicaSimples dica = new DicaMaterial("material");
+//			dao.persist(dica);
+//			tema.addDica(dica);
+//			
+//			dica = new DicaAssunto("Assunto");
+//			dao.persist(dica);
+//			tema.addDica(dica);
+//			
+//			dica = new DicaDisciplina("Disciplina", "Razao");
+//			dao.persist(dica);
+//			tema.addDica(dica);
+//			
+//			dica = new DicaConselho("conselho");
+//			dao.persist(dica);
+//			tema.addDica(dica);
 			
 			dao.persist(tema);
 			disciplina.addTema(tema);
