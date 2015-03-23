@@ -14,9 +14,7 @@ public class Metadica extends Dica {
 	@ElementCollection
 	private List<Dica> dicasAgregadas;
 	private String comentario;
-	
-//	@ManyToOne
-//	Disciplina disciplina;
+
 	
 	public Metadica() {
 		super();
@@ -26,7 +24,6 @@ public class Metadica extends Dica {
 		super();
 		this.setComentario(comentario);
 		this.setDicasAgregadas(dicasAgregadas);
-//		this.disciplina = disciplina;
 		
 	}
 
@@ -46,17 +43,8 @@ public class Metadica extends Dica {
 		this.comentario = comentario;
 	}
 	
-	
-//	public Disciplina getDisciplina() {
-//		return disciplina;
-//	}
-//	
-//	public void setDiciplina(Disciplina disciplina) {
-//		this.disciplina = disciplina;
-//	}
-	
 	@Override
 	public String toString() {
-		return "metadica";
+		return "Comentario: " + comentario;
 	}
 }

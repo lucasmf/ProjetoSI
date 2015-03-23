@@ -1,4 +1,4 @@
-@(usuario : Usuario, disciplina : Disciplina)
+@(usuario : Usuario, disciplina : Disciplina, formComentario : Form[Comentario])
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +49,7 @@
       
       <ul class="nav nav-stacked">
       	@for(tema <- disciplina.getTemas) {
-      		<li><a href='@routes.Application.getPaginaTema(tema.getId)'><i class="glyphicon glyphicon-link"></i> @tema.getNome</a></li>
+      		<li><a href='@routes.Temas.getPaginaTema(tema.getId)'><i class="glyphicon glyphicon-link"></i> @tema.getNome</a></li>
       	}		
       </ul>
       
@@ -65,13 +65,80 @@
       
 	   <div class="row">
             <!-- center left-->	
-         	<div class="col-md-7">
-				@disciplina.getMetadicas.size()    
-				@for(metadica <- disciplina.getMetadicas) {
-					<p>@metadica.getComentario</p>
-					@for(dica <- metadica.getDicasAgregadas) {
-						<p>@dica.toString</p>
-					}
+         	<div class="col-md-7"> 
+				@for(dica <- disciplina.getMetadicas) {
+					@if(dica.isApropriada) {
+	             	<div class="panel panel-default" style="border-color:@dica.getColor">
+	                  <div class="panel-heading" style="background-color:@dica.getBackgroundColor">
+	                  	<h4>Meta Dica # @disciplina.getMetadicas.indexOf(dica)
+	           				<div class="pull-right">
+				                <a href="/disciplina/@disciplina.getId()/@dica.getId()/1"><span style="color:green" class="glyphicon glyphicon-success glyphicon-chevron-up"></span></a>
+				            	@dica.getAprovacao%  
+				           		<a href="/disciplina/@disciplina.getId()/@dica.getId()/0"><span style="color:red" class="glyphicon glyphicon-danger glyphicon-chevron-down"></span></a>
+		               		</div>
+		                </h4>
+	                  </div>
+	                  <div class="panel-body">
+		                   @dica.toString()
+		                  <br>
+	                  </div><!--/panel-body-->
+	                  <div class="panel-footer">
+	                  	
+	                    <a title="Escrever comentário" data-toggle="modal" href="#addComentarioModal@dica.getId">Comentar <i class="glyphicon glyphicon-pencil"></i></a>
+	                  	<div class="modal" id="addComentarioModal@dica.getId">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						        <h4 class="modal-title">Adiconar Comentário</h4>
+						      </div>
+						      <div class="modal-body">
+						        @if(dica.usuarioPodeComentar(usuario.getId)) {
+						       		<form action="@routes.Application.adicionarComentario(disciplina.getId, dica.getId)" method="POST">
+										<input type="text" name="comentario" placeholder="Comentário" value='@formComentario("comentario").value'
+			                  				class="form-control">
+										<br>
+										<div align="center"><input type="submit" class="btn btn-primary" value="Comentar"></div>
+									</form>
+								} else {
+									<div class="alert alert-warning" role="alert">Você precisa dar um voto negativo na dica para pode comentar.</div>
+								
+									<input type="text" name="comentarioDisabled" placeholder="Comentário" class="form-control" disabled>
+									<br>
+									<div align="center"><input type="submit" class="btn btn-primary" value="Comentar" disabled></div>
+								}
+						      </div>
+						      <div class="modal-footer">
+						      </div>
+						    </div><!-- /.modal-content -->
+						  </div><!-- /.modal-dalog -->
+						</div><!-- /.modal -->
+	                  	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	                  	
+	          		    <a title="Escrever comentário" data-toggle="modal" href="#visualizarComentariosModal@dica.getId">Visualizar comentários <i class="glyphicon glyphicon-list-alt"></i></a>
+	                  	<div class="modal" id="visualizarComentariosModal@dica.getId">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						        <h4 class="modal-title">Razões de discordância</h4>
+						      </div>
+						      <div class="modal-body">
+						        @for(comment <- dica.getComentarios()) {
+						        	@comment
+						        	<hr>
+						        }
+						      </div>
+						    </div><!-- /.modal-content -->
+						  </div><!-- /.modal-dalog -->
+						</div><!-- /.modal -->
+	                  	<div class="pull-right">
+						     <a title="Denunciar abuso" href="/disciplina/@disciplina.getId()/@dica.getId()/2"><i class="glyphicon glyphicon-ban-circle"></i></a>               
+		              	</div>
+	                  	
+	                  </div>
+	               </div><!--/panel-->    
+	           		}
 				}
           	</div><!--/col-->
          
@@ -79,7 +146,7 @@
         	<div class="col-md-5">
               
                 <ul class="nav nav-justified">
-         			<li><a title="Add Metadica" data-toggle="modal" href="#addMetaDica"><span class="glyphicon glyphicon-plus-sign"></span>Adiconar Metadica</a></li>
+         			<li><a title="Add Metadica" data-toggle="modal" href="#addMetaDica"><span class="glyphicon glyphicon-plus-sign"></span> Adiconar Metadica</a></li>
        			</ul>  
        			  
                 <hr>
@@ -105,6 +172,12 @@
         <form method="POST" action="@routes.Application.addMetadica(disciplina.getId)">
 			<input type="text" name="comentario" placeholder="Comentário" class="form-control">
 			<hr>
+			<p>Metadicas</p>
+			<ul class="list-group">
+			@for(metadica <- disciplina.getMetadicas) {
+				<li class="list-group-item"><input type="checkbox" name="dicas[]" value="@metadica.getId"> @metadica.toString</li>
+			}
+			</ul>
 			@for(tema <- disciplina.getTemas) {
 				<p>@tema.getNome</p>
 				<ul class="list-group">

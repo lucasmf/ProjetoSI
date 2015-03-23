@@ -121,7 +121,7 @@
 						      </div>
 						      <div class="modal-body">
 						        @if(dica.usuarioPodeComentar(usuario.getId)) {
-						       		<form action="@routes.Application.adicionarComentario(tema.getId, dica.getId)" method="POST">
+						       		<form action="@routes.Temas.adicionarComentario(tema.getId, dica.getId)" method="POST">
 										<input type="text" name="comentario" placeholder="Comentário" value='@formComentario("comentario").value'
 			                  				class="form-control">
 										<br>
@@ -236,7 +236,7 @@
         <h4 class="modal-title">Adiconar Dica</h4>
       </div>
       <div class="modal-body">
-         @helper.form(routes.Application.adicionarDicaMaterial(tema.getId())) {
+         @helper.form(routes.Temas.adicionarDicaMaterial(tema.getId())) {
 				 <br>
 			       <p>
 				      <input type="url" name="linkMaterial" placeholder="Link do Material" value='@formDicaMaterial("linkMaterial").value'
@@ -262,7 +262,7 @@
         <h4 class="modal-title">Adiconar Dica</h4>
       </div>
       <div class="modal-body">
-         @helper.form(routes.Application.adicionarDicaDisciplina(tema.getId())) {
+         @helper.form(routes.Temas.adicionarDicaDisciplina(tema.getId())) {
 				 <br>
 			       <p>
 				      <input type="text" name="nomeDisciplina" placeholder="Nome da Disciplina" value='@formDicaDiscplina("nomeDisciplina").value'
@@ -292,7 +292,7 @@
         <h4 class="modal-title">Adiconar Dica</h4>
       </div>
       <div class="modal-body">
-         @helper.form(routes.Application.adicionarDicaAssunto(tema.getId())) {
+         @helper.form(routes.Temas.adicionarDicaAssunto(tema.getId())) {
 				 <br>
 			       <p>
 				      <input type="text" name="assunto" placeholder="Assunto" value='@formDicaAssunto("assunto").value'
@@ -318,7 +318,7 @@
         <h4 class="modal-title">Adiconar Dica</h4>
       </div>
       <div class="modal-body">
-         @helper.form(routes.Application.adicionarDicaConselho(tema.getId())) {
+         @helper.form(routes.Temas.adicionarDicaConselho(tema.getId())) {
 				 <br>
 			       <p>
 				      <input type="text" name="conselho" placeholder="Conselho" value='@formDicaConselho("conselho").value'
