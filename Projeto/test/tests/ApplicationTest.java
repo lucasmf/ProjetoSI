@@ -39,12 +39,11 @@ public class ApplicationTest extends AbstractTest {
 		int a = 1 + 1;
 		assertThat(a).isEqualTo(2);
 	}
-	
-/*	@Test
-	public void testCallIndex() {
-		Result result = callAction(controllers.routes.ref.Application.index(),
-				fakeRequest());
-		assertThat(status(result)).isEqualTo(Http.Status.OK);		
-	} */
+
+	/*
+	 * @Test public void testCallIndex() { Result result =
+	 * callAction(controllers.routes.ref.Application.index(), fakeRequest());
+	 * assertThat(status(result)).isEqualTo(Http.Status.OK); }
+	 */
 
 }
