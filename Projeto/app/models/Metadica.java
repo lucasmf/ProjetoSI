@@ -4,13 +4,11 @@ import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity(name="Metadica")
 public class Metadica extends Dica {
 	
-	@OneToMany
 	@ElementCollection
 	private List<Dica> dicasAgregadas;
 	private String comentario;

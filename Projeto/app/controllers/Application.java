@@ -1,20 +1,13 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import models.Comentario;
 import models.Dica;
-import models.DicaAssunto;
-import models.DicaConselho;
-import models.DicaDisciplina;
-import models.DicaMaterial;
-import models.DicaSimples;
 import models.Disciplina;
 import models.Metadica;
-import models.Disciplina;
 import models.Usuario;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
@@ -24,7 +17,6 @@ import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
-import views.html.paginaTema;
 
 public class Application extends Controller {
 
@@ -43,9 +35,13 @@ public class Application extends Controller {
 		}
 		Usuario usuario = getUsuarioLogado();
 
-		List<Disciplina> disciplina = dao.findByAttributeName("Disciplina",
+		List<Disciplina> disciplinas = dao.findByAttributeName("Disciplina",
 				"nome", "SI1");
-		return ok(index.render(usuario, disciplina.get(0), formComentario));
+		Disciplina disciplina = disciplinas.get(0);
+		disciplina.sortMetadicas();
+		dao.merge(disciplina);
+		dao.flush();
+		return ok(index.render(usuario, disciplina, formComentario));
 	}
 
 	@Transactional
@@ -80,14 +76,13 @@ public class Application extends Controller {
 			return redirect(routes.Login.show());
 		}
 		Dica dica = (Dica) dao.findByEntityId(Dica.class, idDica);
-		Disciplina Disciplina = (Disciplina) dao.findByEntityId(Disciplina.class, idDisciplina);
+		Disciplina disciplina = (Disciplina) dao.findByEntityId(Disciplina.class, idDisciplina);
 		Usuario usuario = getUsuarioLogado();
 		dica.votar(usuario.getId(), v);
 		dao.merge(dica);
-		Disciplina = (Disciplina) dao.findByEntityId(Disciplina.class, idDisciplina);
-		//Disciplina.sortDicas();
-		dao.merge(Disciplina);
-		dao.flush();
+		disciplina = (Disciplina) dao.findByEntityId(Disciplina.class, idDisciplina);
+		disciplina.sortMetadicas();
+		dao.merge(disciplina);
 		return redirect(routes.Application.index());	
 	}
 	
@@ -100,8 +95,6 @@ public class Application extends Controller {
 			session().clear();
 			return redirect(routes.Login.show());
 		}
-		
-		Usuario usuario = getUsuarioLogado();
 		Dica dica = (Dica) dao.findByEntityId(Dica.class, idDica);
 		Disciplina disciplina = (Disciplina) dao.findByEntityId(Disciplina.class, idDisciplina);
 		formComentario = Form.form(Comentario.class).bindFromRequest();

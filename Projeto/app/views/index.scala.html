@@ -79,8 +79,19 @@
 		                </h4>
 	                  </div>
 	                  <div class="panel-body">
-		                   @dica.toString()
-		                  <br>
+		                  <ul class="list-group">
+			                  <li class="list-group-item" data-toggle="collapse" data-target="#dicasAgregadas@dica.getId">
+	                          		@dica.toString()
+	                          		<div class="pull-right">
+	                          		<span class="glyphicon glyphicon-success glyphicon-chevron-down"></span>
+	                          		</div>
+	                          </li>
+	                          <div class="collapse" id="dicasAgregadas@dica.getId()">
+		                          @for(dicaAgregada <- dica.getDicasAgregadas) {
+		                          	 <li class="list-group-item" style="background-color:@dica.getBackgroundColor"> @dicaAgregada.toString</li>
+		                          }
+	                          </div>
+                          </ul>
 	                  </div><!--/panel-body-->
 	                  <div class="panel-footer">
 	                  	
@@ -146,7 +157,7 @@
         	<div class="col-md-5">
               
                 <ul class="nav nav-justified">
-         			<li><a title="Add Metadica" data-toggle="modal" href="#addMetaDica"><span class="glyphicon glyphicon-plus-sign"></span> Adiconar Metadica</a></li>
+         			<li><a title="Add Metadica" data-toggle="modal" href="#addMetaDica"><span style="color:#FF3399" class="glyphicon glyphicon-plus-sign"></span> Adiconar Metadica</a></li>
        			</ul>  
        			  
                 <hr>
@@ -182,7 +193,7 @@
 				<p>@tema.getNome</p>
 				<ul class="list-group">
 					@for(dica <- tema.getDicas) {
-						<li class="list-group-item"><input type="checkbox" name="dicas[]" value="@dica.getId"> @dica.toString</li>
+						<li class="list-group-item" style="background-color:@dica.getBackgroundColor"><input type="checkbox" name="dicas[]" value="@dica.getId"> @dica.toString</li>
 					}
 				</ul>
 			}

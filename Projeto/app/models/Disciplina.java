@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -18,7 +19,7 @@ public class Disciplina {
 	private Long id;
 	
 	private String nome;
-	//private String sigla; ??
+	
 	@OneToMany
 	@ElementCollection
 	private List<Tema> temas = new ArrayList<Tema>();
@@ -33,7 +34,7 @@ public class Disciplina {
 	}
 	
 	public Disciplina(String nome) {
-		this.nome = nome;
+		this.setNome(nome);
 	}
 	
 	public List<Tema> getTemas() {
@@ -68,4 +69,16 @@ public class Disciplina {
 		this.id = id;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public void sortMetadicas() {
+		Collections.sort(this.metadicas);
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 }
