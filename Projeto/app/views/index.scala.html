@@ -27,8 +27,8 @@
           <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
             <i class="glyphicon glyphicon-user"></i> @usuario.getNome <span class="caret"></span></a>
           <ul id="g-account-menu" class="dropdown-menu" role="menu">
-            <li><a href="/logout">logout</a></li>
             <li><a href="#">Página Principal</a></li>
+            <li><a href="/logout">logout</a></li>
           </ul>
         </li>
       </ul>
@@ -186,14 +186,18 @@
 			<p>Metadicas</p>
 			<ul class="list-group">
 			@for(metadica <- disciplina.getMetadicas) {
-				<li class="list-group-item"><input type="checkbox" name="dicas[]" value="@metadica.getId"> @metadica.toString</li>
+				@if(metadica.isApropriada) {
+					<li class="list-group-item"><input type="checkbox" name="dicas[]" value="@metadica.getId"> @metadica.toString</li>
+				}
 			}
 			</ul>
 			@for(tema <- disciplina.getTemas) {
 				<p>@tema.getNome</p>
 				<ul class="list-group">
 					@for(dica <- tema.getDicas) {
-						<li class="list-group-item" style="background-color:@dica.getBackgroundColor"><input type="checkbox" name="dicas[]" value="@dica.getId"> @dica.toString</li>
+						@if(dica.isApropriada) {
+							<li class="list-group-item" style="background-color:@dica.getBackgroundColor"><input type="checkbox" name="dicas[]" value="@dica.getId"> @dica.toString</li>
+						}	
 					}
 				</ul>
 			}
