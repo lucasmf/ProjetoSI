@@ -58,18 +58,6 @@ public class LoginTest extends AbstractTest {
 	}
 
 	@Test
-	public void testSignUp() {
-		callAction(
-				controllers.routes.ref.Login.signUp(),
-				fakeRequest().withFormUrlEncodedBody(
-						ImmutableMap.of("nome", "nome", "email",
-								"casal21@gmail.com", "password", "casal20")));
-		List<Usuario> usuarios = dao.findByAttributeName("Usuario", "email",
-				"casal21@gmail.com");
-		assertEquals(usuarios.size(), 1);
-	}
-
-	@Test
 	public void testAuthenticateFailure() {
 		Result result = callAction(
 				controllers.routes.ref.Login.authenticate(),
