@@ -21,6 +21,7 @@ public class Login extends Controller {
 		if (session().get("email") != null) {
 			return redirect(routes.Application.index());
 		}
+		loginForm = Form.form(Usuario.class).bindFromRequest();
 		return ok(login.render(loginForm));
 	}
 
